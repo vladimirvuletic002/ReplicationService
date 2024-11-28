@@ -21,9 +21,18 @@
     <ClCompile Include="original_server.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="queue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="common.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="queue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

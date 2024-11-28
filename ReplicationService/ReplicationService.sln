@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client", "Client\Client.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CopyServer", "CopyServer\CopyServer.vcxproj", "{54A3153A-FABF-4FD8-B9C6-6114FCD2A3F4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Process", "Process\Process.vcxproj", "{2F977374-9E31-4F31-B78B-DEA7961B6FE5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{54A3153A-FABF-4FD8-B9C6-6114FCD2A3F4}.Release|x64.Build.0 = Release|x64
 		{54A3153A-FABF-4FD8-B9C6-6114FCD2A3F4}.Release|x86.ActiveCfg = Release|Win32
 		{54A3153A-FABF-4FD8-B9C6-6114FCD2A3F4}.Release|x86.Build.0 = Release|Win32
+		{2F977374-9E31-4F31-B78B-DEA7961B6FE5}.Debug|x64.ActiveCfg = Debug|x64
+		{2F977374-9E31-4F31-B78B-DEA7961B6FE5}.Debug|x64.Build.0 = Debug|x64
+		{2F977374-9E31-4F31-B78B-DEA7961B6FE5}.Debug|x86.ActiveCfg = Debug|Win32
+		{2F977374-9E31-4F31-B78B-DEA7961B6FE5}.Debug|x86.Build.0 = Debug|Win32
+		{2F977374-9E31-4F31-B78B-DEA7961B6FE5}.Release|x64.ActiveCfg = Release|x64
+		{2F977374-9E31-4F31-B78B-DEA7961B6FE5}.Release|x64.Build.0 = Release|x64
+		{2F977374-9E31-4F31-B78B-DEA7961B6FE5}.Release|x86.ActiveCfg = Release|Win32
+		{2F977374-9E31-4F31-B78B-DEA7961B6FE5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,12 +1,15 @@
-#include "../Server/common.h"
+﻿#include "../Server/common.h"
 
-#define ORIGINAL_PORT 8080
+#define CURRENT_PORT 8081
+#define VOLTAGE_PORT 8082
+#define POWER_PORT 8083
 #define SERVER_IP_ADDRESS "127.0.0.1"
 #define MAX_MEASUREMENTS 100
 
 bool InitializeWindowsSockets();
-void inputMeasurement(Measurement* m);
+void inputMeasurement(Measurement* m, int selectedPort);
 void print_menu();
+int choose_port();
 
 int main() {
 
@@ -14,6 +17,7 @@ int main() {
     Measurement measurement;
     int iResult;
     int choice;
+    int selPort;
 
 
     if (InitializeWindowsSockets() == false)
@@ -21,6 +25,8 @@ int main() {
         // Logovanje je odradjeno u InitializeWindowsSockets() f-ji
         return 1;
     }
+
+    selPort = choose_port();
 
     connectSocket = socket(AF_INET,
         SOCK_STREAM,
@@ -37,7 +43,7 @@ int main() {
     sockaddr_in serverAddress;
     serverAddress.sin_family = AF_INET;
     serverAddress.sin_addr.s_addr = inet_addr(SERVER_IP_ADDRESS);
-    serverAddress.sin_port = htons(ORIGINAL_PORT);
+    serverAddress.sin_port = htons(selPort);
     // connect to server specified in serverAddress and socket connectSocket
     if (connect(connectSocket, (SOCKADDR*)&serverAddress, sizeof(serverAddress)) == SOCKET_ERROR)
     {
@@ -52,7 +58,7 @@ int main() {
 
         switch (choice) {
             case 1:
-                inputMeasurement(&measurement);
+                inputMeasurement(&measurement,selPort);
 
                 // Send an prepared message with null terminator included
                 iResult = send(connectSocket, (const char*)&measurement, sizeof(Measurement), 0);
@@ -91,17 +97,63 @@ void print_menu() {
     printf("Izaberi opciju: ");
 }
 
-void inputMeasurement(Measurement* m) {
+void inputMeasurement(Measurement* m, int selectedPort) {
     printf("\n----------Unesi novo merenje----------\n");
     printf("ID uredjaja: "); 
     scanf_s("%d", &m->deviceId);
-    printf("Jacina struje [A]: ");
-    scanf_s("%f", &m->current);
-    printf("Napon [V]: ");
-    scanf_s("%f", &m->voltage);
-    printf("Snaga [kW]: ");
-    scanf_s("%f", &m->power);
+
+    switch (selectedPort) {
+        case CURRENT_PORT:
+            printf("Jacina struje [A]: ");
+            scanf_s("%f", &m->value);
+            m->type = CURRENT;
+            break;
+        case VOLTAGE_PORT:
+            printf("Napon [V]: ");
+            scanf_s("%f", &m->value);
+            m->type = VOLTAGE;
+            break;
+        case POWER_PORT:
+            printf("Snaga [kW]: ");
+            scanf_s("%f", &m->value);
+            m->type = POWER;
+
+            break;
+    }
+    
+    time_t current_time = time(NULL);
+    m->timeStamp = *localtime(&current_time);
+
     printf("--------------------------------------\n");
+}
+
+int choose_port() {
+    int choice;
+    int selected;
+    printf("---------Izbor tipa merenja---------\n");
+    printf("1 - Jacina struje [A]\n");
+    printf("2 - Napon [V]\n");
+    printf("3 - Snaga [kW]\n");
+    printf("Izaberi tip merenja: ");
+    scanf_s("%d", &choice);
+
+    // Postavljanje porta na osnovu korisničkog izbora
+    switch (choice) {
+    case 1:
+        selected = CURRENT_PORT;
+        break;
+    case 2:
+        selected = VOLTAGE_PORT;
+        break;
+    case 3:
+        selected = POWER_PORT;
+        break;
+    default:
+        printf("Nevazeci izbor. Zatvaranje aplikacije.\n");
+        WSACleanup();
+        return 0;
+    }
+    return selected;
 }
 
 

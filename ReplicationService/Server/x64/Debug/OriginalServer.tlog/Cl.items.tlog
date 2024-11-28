@@ -1,3 +1,4 @@
-C:\Users\draga\Documents\IKP\ReplicationService\Server\main.cpp;C:\Users\draga\Documents\IKP\ReplicationService\Server\x64\Debug\main.obj
-C:\Users\draga\Documents\IKP\ReplicationService\Server\original_server.cpp;C:\Users\draga\Documents\IKP\ReplicationService\Server\x64\Debug\original_server.obj
-C:\Users\draga\Documents\IKP\ReplicationService\Server\queue.cpp;C:\Users\draga\Documents\IKP\ReplicationService\Server\x64\Debug\queue.obj
+C:\Users\draga\Documents\IKP\ReplicationService\ReplicationService\Server\common.cpp;C:\Users\draga\Documents\IKP\ReplicationService\ReplicationService\Server\x64\Debug\common.obj
+C:\Users\draga\Documents\IKP\ReplicationService\ReplicationService\Server\main.cpp;C:\Users\draga\Documents\IKP\ReplicationService\ReplicationService\Server\x64\Debug\main.obj
+C:\Users\draga\Documents\IKP\ReplicationService\ReplicationService\Server\original_server.cpp;C:\Users\draga\Documents\IKP\ReplicationService\ReplicationService\Server\x64\Debug\original_server.obj
+C:\Users\draga\Documents\IKP\ReplicationService\ReplicationService\Server\queue.cpp;C:\Users\draga\Documents\IKP\ReplicationService\ReplicationService\Server\x64\Debug\queue.obj

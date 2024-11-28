@@ -39,12 +39,10 @@ DWORD WINAPI clientHandler(LPVOID param) {
         int bytesReceived = recv(clientSocket, (char*)&data, sizeof(Measurement), 0);
         if (bytesReceived <= 0) break;
 
-        printf("\n\n---------Podaci primljeni od uredjaja:---------\n ID: %d\n Jacina struje=%.2f [A]\n Napon=%.2f [V]\n Snaga=%.2f [kW]\n-----------------------------------------------\n",
-            data.deviceId, data.current, data.voltage, data.power);
+        //printf("\n\n---------Podaci primljeni od uredjaja:---------\n ID: %d\n Jacina struje=%.2f [A]\n Napon=%.2f [V]\n Snaga=%.2f [kW]\n-----------------------------------------------\n",
+            //data.deviceId, data.current, data.voltage, data.power);
 
-        char message[MAX_MESSAGE_LENGTH];
-        snprintf(message, MAX_MESSAGE_LENGTH, "Uredjaj ID: %d, Jacina struje=%.2f, Napon=%.2f, Snaga=%.2f",
-            data.deviceId, data.current, data.voltage, data.power);
+
 
         enqueue(messQueue, data); // Dodaj poruku u red za prosleđivanje kopiji
     }

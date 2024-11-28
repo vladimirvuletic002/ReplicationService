@@ -60,7 +60,7 @@ void print_queue(queue* q) {
 	printf("Merenja: \n");
 	while (curr) {
 		Measurement m = curr->data;
-		printf("ID uredjaja: %d, Jacina struje: %.2f [A], Napon: %.2f [V], Snaga: %.2f [W]\n", m.deviceId, m.current, m.voltage, m.power);
+		printMeasurement(&m);
 		curr = curr->next;
 	}
 }
