@@ -1,0 +1,921 @@
+﻿  Common.cpp
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(14,11): error C3646: 'value': unknown override specifier
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(14,5): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(28,54): error C2061: syntax error: identifier 'queue'
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,6): error C2143: syntax error: missing ';' before '*'
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,8): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(10,17): error C3646: 'data': unknown override specifier
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(10,5): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(18,3): error C2378: 'queue': redefinition; symbol cannot be overloaded with a typedef
+  (compiling source file '../Common/Common.cpp')
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,1):
+      see declaration of 'queue'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(20,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(20,1): error C2086: 'int queue': redefinition
+  (compiling source file '../Common/Common.cpp')
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,1):
+      see declaration of 'queue'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(20,7): error C2146: syntax error: missing ';' before identifier 'kju'
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(22,22): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(24,6): error C2182: 'init_queue': this use of 'void' is not valid
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(24,24): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(26,28): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(28,21): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(28,24): error C2065: 'Measurement': undeclared identifier
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(28,36): error C2146: syntax error: missing ')' before identifier 'el'
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(30,20): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(30,23): error C2065: 'Measurement': undeclared identifier
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(30,36): error C2065: 'm': undeclared identifier
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(32,6): error C2182: 'free_queue': this use of 'void' is not valid
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(32,24): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(34,6): error C2182: 'print_queue': this use of 'void' is not valid
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(34,25): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(66,63): error C2061: syntax error: identifier 'queue'
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,44): error C2065: 'qMtx': undeclared identifier
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,37): error C2275: 'std::mutex': expected an expression instead of a type
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,50): error C2275: 'Measurement': expected an expression instead of a type
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,62): error C2146: syntax error: missing ')' before identifier 'm'
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,44): error C2065: 'qMtx': undeclared identifier
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,37): error C2275: 'std::mutex': expected an expression instead of a type
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,63): error C2065: 'm': undeclared identifier
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,50): error C2275: 'Measurement': expected an expression instead of a type
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,6): error C2182: 'printQueue': this use of 'void' is not valid
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,24): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,39): error C2065: 'mtx': undeclared identifier
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,32): error C2275: 'std::mutex': expected an expression instead of a type
+  (compiling source file '../Common/Common.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(211,25): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(211,36): error C2143: syntax error: missing ',' before '&'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(213,13): error C2065: 'q': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(213,34): error C2065: 'q': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(213,55): error C2065: 'q': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(216,63): error C2061: syntax error: identifier 'queue'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(218,43): error C2065: 'queueMtx': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(219,21): error C2065: 'messageQueue': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(243,20): error C2065: 'found': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(244,13): error C2065: 'found': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(246,25): error C2065: 'found': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(255,20): error C2065: 'newQ': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(256,24): error C2065: 'newQ': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(257,64): error C2065: 'newQ': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(258,25): error C2065: 'newQ': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(323,7): error C2182: 'printQueue': this use of 'void' is not valid
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(323,7): error C2374: 'printQueue': redefinition; multiple initialization
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,6):
+      see declaration of 'printQueue'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(323,25): error C2065: 'q': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(323,32): error C2275: 'std::mutex': expected an expression instead of a type
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(323,44): error C2143: syntax error: missing ';' before '{'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(324,6): error C2059: syntax error: 'if'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(324,31): error C2143: syntax error: missing ';' before '{'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(324,31): error C2447: '{': missing function header (old-style formal list?)
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(346,6): error C2059: syntax error: 'else'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(346,11): error C2143: syntax error: missing ';' before '{'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(346,11): error C2447: '{': missing function header (old-style formal list?)
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(349,1): error C2059: syntax error: '}'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(349,1): error C2143: syntax error: missing ';' before '}'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(351,20): error C2923: 'std::unordered_map': 'queue' is not a valid template type argument for parameter '_Ty'
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,1):
+      see declaration of 'queue'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(351,20): error C2976: 'std::unordered_map': too few template arguments
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\unordered_map(61,7):
+      see declaration of 'std::unordered_map'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(351,110): error C2143: syntax error: missing ';' before '{'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(351,110): error C2447: '{': missing function header (old-style formal list?)
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(393,6): error C2374: 'SafeDequeue': redefinition; multiple initialization
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,6):
+      see declaration of 'SafeDequeue'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(393,44): error C2065: 'qMtx': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(393,37): error C2275: 'std::mutex': expected an expression instead of a type
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(393,63): error C2065: 'm': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(393,50): error C2275: 'Measurement': expected an expression instead of a type
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(393,66): error C2143: syntax error: missing ';' before '{'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(395,5): error C2447: '{': missing function header (old-style formal list?)
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(405,1): error C2059: syntax error: '}'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(405,1): error C2143: syntax error: missing ';' before '}'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(407,65): error C2143: syntax error: missing ';' before '{'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.cpp(407,65): error C2447: '{': missing function header (old-style formal list?)
+  Queue.cpp
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(14,11): error C3646: 'value': unknown override specifier
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(14,5): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(28,54): error C2061: syntax error: identifier 'queue'
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,6): error C2143: syntax error: missing ';' before '*'
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,8): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(66,63): error C2061: syntax error: identifier 'queue'
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,44): error C2065: 'qMtx': undeclared identifier
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,37): error C2275: 'std::mutex': expected an expression instead of a type
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,50): error C2275: 'Measurement': expected an expression instead of a type
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,62): error C2146: syntax error: missing ')' before identifier 'm'
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,44): error C2065: 'qMtx': undeclared identifier
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,37): error C2275: 'std::mutex': expected an expression instead of a type
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,63): error C2065: 'm': undeclared identifier
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,50): error C2275: 'Measurement': expected an expression instead of a type
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,6): error C2182: 'printQueue': this use of 'void' is not valid
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,24): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,39): error C2065: 'mtx': undeclared identifier
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,32): error C2275: 'std::mutex': expected an expression instead of a type
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(18,3): error C2378: 'queue': redefinition; symbol cannot be overloaded with a typedef
+  (compiling source file '../Common/Queue.cpp')
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,1):
+      see declaration of 'queue'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(20,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(20,1): error C2086: 'int queue': redefinition
+  (compiling source file '../Common/Queue.cpp')
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,1):
+      see declaration of 'queue'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(20,7): error C2146: syntax error: missing ';' before identifier 'kju'
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(22,22): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(24,6): error C2182: 'init_queue': this use of 'void' is not valid
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(24,24): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(26,28): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(28,21): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(28,24): error C2275: 'Measurement': expected an expression instead of a type
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(28,36): error C2146: syntax error: missing ')' before identifier 'el'
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(30,20): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(30,36): error C2065: 'm': undeclared identifier
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(30,23): error C2275: 'Measurement': expected an expression instead of a type
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(32,6): error C2182: 'free_queue': this use of 'void' is not valid
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(32,24): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(34,6): error C2182: 'print_queue': this use of 'void' is not valid
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(34,25): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/Queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(4,6): error C2182: 'init_queue': this use of 'void' is not valid
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(4,6): error C2374: 'init_queue': redefinition; multiple initialization
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(24,6):
+      see declaration of 'init_queue'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(4,24): error C2065: 'q': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(4,27): error C2143: syntax error: missing ';' before '{'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(5,2): error C3927: '->': trailing return type is not allowed after a non-function declarator
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(5,5): error C3613: missing return type after '->' ('int' assumed)
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(5,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(5,5): error C2146: syntax error: missing ';' before identifier 'head'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(6,2): error C3927: '->': trailing return type is not allowed after a non-function declarator
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(6,5): error C3613: missing return type after '->' ('int' assumed)
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(6,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(6,2): error C2086: 'int q': redefinition
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(5,2):
+      see declaration of 'q'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(6,5): error C2146: syntax error: missing ';' before identifier 'tail'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(7,2): error C3927: '->': trailing return type is not allowed after a non-function declarator
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(7,5): error C3613: missing return type after '->' ('int' assumed)
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(7,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(7,2): error C2086: 'int q': redefinition
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(5,2):
+      see declaration of 'q'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(7,5): error C2146: syntax error: missing ';' before identifier 'size'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(8,1): error C2059: syntax error: '}'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(8,1): error C2143: syntax error: missing ';' before '}'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(10,31): error C2143: syntax error: missing ';' before '{'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(10,31): error C2447: '{': missing function header (old-style formal list?)
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(16,6): error C2374: 'enqueue': redefinition; multiple initialization
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(28,6):
+      see declaration of 'enqueue'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(16,24): error C2275: 'Measurement': expected an expression instead of a type
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(16,36): error C2146: syntax error: missing ')' before identifier 'el'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(16,40): error C2143: syntax error: missing ';' before '{'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(16,40): error C2447: '{': missing function header (old-style formal list?)
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(39,5): error C2374: 'dequeue': redefinition; multiple initialization
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(30,5):
+      see declaration of 'dequeue'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(39,36): error C2065: 'el': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(39,23): error C2275: 'Measurement': expected an expression instead of a type
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(39,40): error C2143: syntax error: missing ';' before '{'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(40,2): error C2059: syntax error: 'if'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(42,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(42,6): error C2440: 'initializing': cannot convert from 'Measurement' to 'int *'
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(42,6):
+      No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(43,2): error C3927: '->': trailing return type is not allowed after a non-function declarator
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(43,5): error C3613: missing return type after '->' ('int' assumed)
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(43,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(43,2): error C2086: 'int q': redefinition
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(5,2):
+      see declaration of 'q'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(43,5): error C2146: syntax error: missing ';' before identifier 'head'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(45,2): error C2059: syntax error: 'if'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(45,23): error C2143: syntax error: missing ';' before '{'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(45,23): error C2447: '{': missing function header (old-style formal list?)
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(49,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(49,2): error C2365: 'free': redefinition; previous definition was 'function'
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\corecrt_malloc.h(89,14):
+      see declaration of 'free'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(50,2): error C3927: '->': trailing return type is not allowed after a non-function declarator
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(50,5): error C3613: missing return type after '->' ('int' assumed)
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(50,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(50,2): error C2086: 'int q': redefinition
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(5,2):
+      see declaration of 'q'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(50,5): error C2146: syntax error: missing ';' before identifier 'size'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(52,2): error C2059: syntax error: 'return'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(53,1): error C2059: syntax error: '}'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(53,1): error C2143: syntax error: missing ';' before '}'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(55,25): error C2143: syntax error: missing ';' before '{'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(55,25): error C2447: '{': missing function header (old-style formal list?)
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(81,6): error C2182: 'print_queue': this use of 'void' is not valid
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(81,6): error C2374: 'print_queue': redefinition; multiple initialization
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(34,6):
+      see declaration of 'print_queue'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(81,28): error C2143: syntax error: missing ';' before '{'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(82,2): error C2059: syntax error: 'if'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(82,25): error C2143: syntax error: missing ';' before '{'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(82,25): error C2447: '{': missing function header (old-style formal list?)
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(88,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(88,2): error C2365: 'printf': redefinition; previous definition was 'function'
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\stdio.h(950,37):
+      see declaration of 'printf'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(89,2): error C2059: syntax error: 'while'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(89,15): error C2143: syntax error: missing ';' before '{'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(89,15): error C2447: '{': missing function header (old-style formal list?)
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(94,1): error C2059: syntax error: '}'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(94,1): error C2143: syntax error: missing ';' before '}'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(96,27): error C2143: syntax error: missing ';' before '{'
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.cpp(96,27): error C2447: '{': missing function header (old-style formal list?)
+  req_queue.cpp
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(14,11): error C3646: 'value': unknown override specifier
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(14,5): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(28,54): error C2061: syntax error: identifier 'queue'
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,6): error C2143: syntax error: missing ';' before '*'
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,8): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(10,17): error C3646: 'data': unknown override specifier
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(10,5): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(18,3): error C2378: 'queue': redefinition; symbol cannot be overloaded with a typedef
+  (compiling source file '../Common/req_queue.cpp')
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,1):
+      see declaration of 'queue'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(20,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(20,1): error C2086: 'int queue': redefinition
+  (compiling source file '../Common/req_queue.cpp')
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,1):
+      see declaration of 'queue'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(20,7): error C2146: syntax error: missing ';' before identifier 'kju'
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(22,22): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(24,6): error C2182: 'init_queue': this use of 'void' is not valid
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(24,24): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(26,28): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(28,21): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(28,24): error C2065: 'Measurement': undeclared identifier
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(28,36): error C2146: syntax error: missing ')' before identifier 'el'
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(30,20): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(30,23): error C2065: 'Measurement': undeclared identifier
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(30,36): error C2065: 'm': undeclared identifier
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(32,6): error C2182: 'free_queue': this use of 'void' is not valid
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(32,24): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(34,6): error C2182: 'print_queue': this use of 'void' is not valid
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(34,25): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(66,63): error C2061: syntax error: identifier 'queue'
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,44): error C2065: 'qMtx': undeclared identifier
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,37): error C2275: 'std::mutex': expected an expression instead of a type
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,50): error C2275: 'Measurement': expected an expression instead of a type
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,62): error C2146: syntax error: missing ')' before identifier 'm'
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,44): error C2065: 'qMtx': undeclared identifier
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,37): error C2275: 'std::mutex': expected an expression instead of a type
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,63): error C2065: 'm': undeclared identifier
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,50): error C2275: 'Measurement': expected an expression instead of a type
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,6): error C2182: 'printQueue': this use of 'void' is not valid
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,24): error C2065: 'q': undeclared identifier
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,39): error C2065: 'mtx': undeclared identifier
+  (compiling source file '../Common/req_queue.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,32): error C2275: 'std::mutex': expected an expression instead of a type
+  (compiling source file '../Common/req_queue.cpp')
+  
+  unordered_map.cpp
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(10,17): error C3646: 'data': unknown override specifier
+  (compiling source file '../Common/unordered_map.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(10,5): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../Common/unordered_map.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(28,24): error C2061: syntax error: identifier 'Measurement'
+  (compiling source file '../Common/unordered_map.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(30,23): error C2061: syntax error: identifier 'Measurement'
+  (compiling source file '../Common/unordered_map.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(68,41): error C2061: syntax error: identifier 'unordered_map'
+  (compiling source file '../Common/unordered_map.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(74,6): error C2182: 'printQueueSelection': this use of 'void' is not valid
+  (compiling source file '../Common/unordered_map.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(74,26): error C2065: 'unordered_map': undeclared identifier
+  (compiling source file '../Common/unordered_map.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(74,41): error C2065: 'messageQueues': undeclared identifier
+  (compiling source file '../Common/unordered_map.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(74,93): error C2065: 'queueMtxs': undeclared identifier
+  (compiling source file '../Common/unordered_map.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(74,61): error C2275: 'std::unordered_map<int,std::mutex,std::hash<int>,std::equal_to<int>,std::allocator<std::pair<const int,std::mutex>>>': expected an expression instead of a type
+  (compiling source file '../Common/unordered_map.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(74,104): error C2065: 'unordered_map': undeclared identifier
+  (compiling source file '../Common/unordered_map.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(74,119): error C2065: 'messageQueuesBackup': undeclared identifier
+  (compiling source file '../Common/unordered_map.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(74,177): error C2065: 'queueMtxsBackup': undeclared identifier
+  (compiling source file '../Common/unordered_map.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(74,145): error C2275: 'std::unordered_map<int,std::mutex,std::hash<int>,std::equal_to<int>,std::allocator<std::pair<const int,std::mutex>>>': expected an expression instead of a type
+  (compiling source file '../Common/unordered_map.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(74,194): error C2062: type 'char' unexpected
+  (compiling source file '../Common/unordered_map.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(75,6): error C2182: 'printer': this use of 'void' is not valid
+  (compiling source file '../Common/unordered_map.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(75,14): error C2065: 'unordered_map': undeclared identifier
+  (compiling source file '../Common/unordered_map.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(75,29): error C2065: 'messageQueues': undeclared identifier
+  (compiling source file '../Common/unordered_map.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(75,81): error C2065: 'queueMtxs': undeclared identifier
+  (compiling source file '../Common/unordered_map.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(75,49): error C2275: 'std::unordered_map<int,std::mutex,std::hash<int>,std::equal_to<int>,std::allocator<std::pair<const int,std::mutex>>>': expected an expression instead of a type
+  (compiling source file '../Common/unordered_map.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.cpp(38,44): error C2039: 'data': is not a member of 'node'
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(9,16):
+      see declaration of 'node'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.cpp(59,51): error C2039: 'data': is not a member of 'node'
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(9,16):
+      see declaration of 'node'
+  
+  CopyService.cpp
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(14,11): error C3646: 'value': unknown override specifier
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(14,5): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(28,54): error C2061: syntax error: identifier 'queue'
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,6): error C2143: syntax error: missing ';' before '*'
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,8): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(10,17): error C3646: 'data': unknown override specifier
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(10,5): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(18,3): error C2378: 'queue': redefinition; symbol cannot be overloaded with a typedef
+  (compiling source file 'CopyService.cpp')
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,1):
+      see declaration of 'queue'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(20,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(20,1): error C2086: 'int queue': redefinition
+  (compiling source file 'CopyService.cpp')
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,1):
+      see declaration of 'queue'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(20,7): error C2146: syntax error: missing ';' before identifier 'kju'
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(22,22): error C2065: 'q': undeclared identifier
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(24,6): error C2182: 'init_queue': this use of 'void' is not valid
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(24,24): error C2065: 'q': undeclared identifier
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(26,28): error C2065: 'q': undeclared identifier
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(28,21): error C2065: 'q': undeclared identifier
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(28,24): error C2065: 'Measurement': undeclared identifier
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(28,36): error C2146: syntax error: missing ')' before identifier 'el'
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(30,20): error C2065: 'q': undeclared identifier
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(30,23): error C2065: 'Measurement': undeclared identifier
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(30,36): error C2065: 'm': undeclared identifier
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(32,6): error C2182: 'free_queue': this use of 'void' is not valid
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(32,24): error C2065: 'q': undeclared identifier
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(34,6): error C2182: 'print_queue': this use of 'void' is not valid
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(34,25): error C2065: 'q': undeclared identifier
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(66,63): error C2061: syntax error: identifier 'queue'
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,44): error C2065: 'qMtx': undeclared identifier
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,37): error C2275: 'std::mutex': expected an expression instead of a type
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,50): error C2275: 'Measurement': expected an expression instead of a type
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,62): error C2146: syntax error: missing ')' before identifier 'm'
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,44): error C2065: 'qMtx': undeclared identifier
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,37): error C2275: 'std::mutex': expected an expression instead of a type
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,63): error C2065: 'm': undeclared identifier
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,50): error C2275: 'Measurement': expected an expression instead of a type
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,6): error C2182: 'printQueue': this use of 'void' is not valid
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,24): error C2065: 'q': undeclared identifier
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,39): error C2065: 'mtx': undeclared identifier
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,32): error C2275: 'std::mutex': expected an expression instead of a type
+  (compiling source file 'CopyService.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(18,6): error C2923: 'std::unordered_map': 'queue' is not a valid template type argument for parameter '_Ty'
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,1):
+      see declaration of 'queue'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(18,6): error C2976: 'std::unordered_map': too few template arguments
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\unordered_map(61,7):
+      see declaration of 'std::unordered_map'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(18,32): error C2133: 'messageQueues': unknown size
+C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(18,32): error C2512: 'std::unordered_map': no appropriate default constructor available
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\unordered_map(61,7):
+      see declaration of 'std::unordered_map'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(40,12): error C2065: 'messageQueue': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(40,34): error C2059: syntax error: ')'
+C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(70,21): error C2664: 'bool EnqueueToMap(std::mutex &,unordered_map &,Measurement)': cannot convert argument 2 from 'std::unordered_map' to 'unordered_map &'
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(68,6):
+      see declaration of 'EnqueueToMap'
+      C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(70,21):
+      while trying to match the argument list '(std::mutex, std::unordered_map, Measurement)'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(105,95): error C2678: binary '[': no operator found which takes a left-hand operand of type 'std::unordered_map' (or there is no acceptable conversion)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\unordered_map(432,18):
+      could be '_Ty &std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc>::operator [](const _Kty &)'
+          C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(105,95):
+          '_Ty &std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc>::operator [](const _Kty &)': cannot convert 'this' pointer from 'std::unordered_map' to 'std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc> &'
+              C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(105,95):
+              Reason: cannot convert from 'std::unordered_map' to 'std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc>'
+              C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(105,95):
+              Conversion requires a second user-defined-conversion operator or constructor
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\unordered_map(259,18):
+      or       '_Ty &std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc>::operator [](_Kty &&)'
+          C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(105,95):
+          '_Ty &std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc>::operator [](_Kty &&)': cannot convert 'this' pointer from 'std::unordered_map' to 'std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc> &'
+              C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(105,95):
+              Reason: cannot convert from 'std::unordered_map' to 'std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc>'
+              C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(105,95):
+              Conversion requires a second user-defined-conversion operator or constructor
+      C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(105,95):
+      while trying to match the argument list '(std::unordered_map, const int)'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(105,79): error C2064: term does not evaluate to a function taking 1 arguments
+C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(112,42): error C2678: binary '[': no operator found which takes a left-hand operand of type 'std::unordered_map' (or there is no acceptable conversion)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\unordered_map(432,18):
+      could be '_Ty &std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc>::operator [](const _Kty &)'
+          C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(112,42):
+          '_Ty &std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc>::operator [](const _Kty &)': cannot convert 'this' pointer from 'std::unordered_map' to 'std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc> &'
+              C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(112,42):
+              Reason: cannot convert from 'std::unordered_map' to 'std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc>'
+              C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(112,42):
+              Conversion requires a second user-defined-conversion operator or constructor
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\unordered_map(259,18):
+      or       '_Ty &std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc>::operator [](_Kty &&)'
+          C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(112,42):
+          '_Ty &std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc>::operator [](_Kty &&)': cannot convert 'this' pointer from 'std::unordered_map' to 'std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc> &'
+              C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(112,42):
+              Reason: cannot convert from 'std::unordered_map' to 'std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc>'
+              C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(112,42):
+              Conversion requires a second user-defined-conversion operator or constructor
+      C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(112,42):
+      while trying to match the argument list '(std::unordered_map, int)'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(112,29): error C2064: term does not evaluate to a function taking 3 arguments
+C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(126,46): error C2678: binary '[': no operator found which takes a left-hand operand of type 'std::unordered_map' (or there is no acceptable conversion)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\unordered_map(432,18):
+      could be '_Ty &std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc>::operator [](const _Kty &)'
+          C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(126,46):
+          '_Ty &std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc>::operator [](const _Kty &)': cannot convert 'this' pointer from 'std::unordered_map' to 'std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc> &'
+              C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(126,46):
+              Reason: cannot convert from 'std::unordered_map' to 'std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc>'
+              C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(126,46):
+              Conversion requires a second user-defined-conversion operator or constructor
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\unordered_map(259,18):
+      or       '_Ty &std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc>::operator [](_Kty &&)'
+          C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(126,46):
+          '_Ty &std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc>::operator [](_Kty &&)': cannot convert 'this' pointer from 'std::unordered_map' to 'std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc> &'
+              C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(126,46):
+              Reason: cannot convert from 'std::unordered_map' to 'std::unordered_map<_Kty,_Ty,_Hasher,_Keyeq,_Alloc>'
+              C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(126,46):
+              Conversion requires a second user-defined-conversion operator or constructor
+      C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(126,46):
+      while trying to match the argument list '(std::unordered_map, int)'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\CopyService\CopyService.cpp(126,33): error C2064: term does not evaluate to a function taking 3 arguments
+  ServiceHelper.cpp
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(14,11): error C3646: 'value': unknown override specifier
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(14,5): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(28,54): error C2061: syntax error: identifier 'queue'
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,6): error C2143: syntax error: missing ';' before '*'
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,8): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(10,17): error C3646: 'data': unknown override specifier
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(10,5): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(18,3): error C2378: 'queue': redefinition; symbol cannot be overloaded with a typedef
+  (compiling source file 'ServiceHelper.cpp')
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,1):
+      see declaration of 'queue'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(20,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(20,1): error C2086: 'int queue': redefinition
+  (compiling source file 'ServiceHelper.cpp')
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,1):
+      see declaration of 'queue'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(20,7): error C2146: syntax error: missing ';' before identifier 'kju'
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(22,22): error C2065: 'q': undeclared identifier
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(24,6): error C2182: 'init_queue': this use of 'void' is not valid
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(24,24): error C2065: 'q': undeclared identifier
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(26,28): error C2065: 'q': undeclared identifier
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(28,21): error C2065: 'q': undeclared identifier
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(28,24): error C2065: 'Measurement': undeclared identifier
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(28,36): error C2146: syntax error: missing ')' before identifier 'el'
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(30,20): error C2065: 'q': undeclared identifier
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(30,23): error C2065: 'Measurement': undeclared identifier
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(30,36): error C2065: 'm': undeclared identifier
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(32,6): error C2182: 'free_queue': this use of 'void' is not valid
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(32,24): error C2065: 'q': undeclared identifier
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(34,6): error C2182: 'print_queue': this use of 'void' is not valid
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(34,25): error C2065: 'q': undeclared identifier
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(66,63): error C2061: syntax error: identifier 'queue'
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,44): error C2065: 'qMtx': undeclared identifier
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,37): error C2275: 'std::mutex': expected an expression instead of a type
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,50): error C2275: 'Measurement': expected an expression instead of a type
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,62): error C2146: syntax error: missing ')' before identifier 'm'
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,44): error C2065: 'qMtx': undeclared identifier
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,37): error C2275: 'std::mutex': expected an expression instead of a type
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,63): error C2065: 'm': undeclared identifier
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,50): error C2275: 'Measurement': expected an expression instead of a type
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,6): error C2182: 'printQueue': this use of 'void' is not valid
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,24): error C2065: 'q': undeclared identifier
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,39): error C2065: 'mtx': undeclared identifier
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,32): error C2275: 'std::mutex': expected an expression instead of a type
+  (compiling source file 'ServiceHelper.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\CopyService\ServiceHelper.cpp(37,24): warning C4473: 'printf' : not enough arguments passed for format string
+      C:\Users\draga\Downloads\Replikacija\Replication\CopyService\ServiceHelper.cpp(37,24):
+      placeholders and their parameters expect 1 variadic arguments, but 0 were provided
+      C:\Users\draga\Downloads\Replikacija\Replication\CopyService\ServiceHelper.cpp(37,24):
+      the missing variadic argument 1 is required by format string '%d'
+  
+  Generating Code...

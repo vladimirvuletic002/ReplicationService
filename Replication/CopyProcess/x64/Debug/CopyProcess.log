@@ -1,0 +1,164 @@
+﻿  CopyProcess.cpp
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(14,11): error C3646: 'value': unknown override specifier
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(14,5): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(28,54): error C2061: syntax error: identifier 'queue'
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,6): error C2143: syntax error: missing ';' before '*'
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,8): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(66,63): error C2061: syntax error: identifier 'queue'
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,44): error C2065: 'qMtx': undeclared identifier
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,37): error C2275: 'std::mutex': expected an expression instead of a type
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,50): error C2275: 'Measurement': expected an expression instead of a type
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(71,62): error C2146: syntax error: missing ')' before identifier 'm'
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,44): error C2065: 'qMtx': undeclared identifier
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,37): error C2275: 'std::mutex': expected an expression instead of a type
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,63): error C2065: 'm': undeclared identifier
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(72,50): error C2275: 'Measurement': expected an expression instead of a type
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,6): error C2182: 'printQueue': this use of 'void' is not valid
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,24): error C2065: 'q': undeclared identifier
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,39): error C2065: 'mtx': undeclared identifier
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Common.h(73,32): error C2275: 'std::mutex': expected an expression instead of a type
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(18,3): error C2378: 'queue': redefinition; symbol cannot be overloaded with a typedef
+  (compiling source file 'CopyProcess.cpp')
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,1):
+      see declaration of 'queue'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(20,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(20,1): error C2086: 'int queue': redefinition
+  (compiling source file 'CopyProcess.cpp')
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,1):
+      see declaration of 'queue'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(20,7): error C2146: syntax error: missing ';' before identifier 'kju'
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(22,22): error C2065: 'q': undeclared identifier
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(24,6): error C2182: 'init_queue': this use of 'void' is not valid
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(24,24): error C2065: 'q': undeclared identifier
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(26,28): error C2065: 'q': undeclared identifier
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(28,21): error C2065: 'q': undeclared identifier
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(28,24): error C2275: 'Measurement': expected an expression instead of a type
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(28,36): error C2146: syntax error: missing ')' before identifier 'el'
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(30,20): error C2065: 'q': undeclared identifier
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(30,36): error C2065: 'm': undeclared identifier
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(30,23): error C2275: 'Measurement': expected an expression instead of a type
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(32,6): error C2182: 'free_queue': this use of 'void' is not valid
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(32,24): error C2065: 'q': undeclared identifier
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(34,6): error C2182: 'print_queue': this use of 'void' is not valid
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\Common\Queue.h(34,25): error C2065: 'q': undeclared identifier
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CPProcess.h(8,25): error C2065: 'messageBackup': undeclared identifier
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CPProcess.h(8,52): error C2065: 'queueMutex': undeclared identifier
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CPProcess.h(8,45): error C2275: 'std::mutex': expected an expression instead of a type
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CPProcess.h(8,64): error C2062: type 'int' unexpected
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CPProcess.h(12,43): error C2061: syntax error: identifier 'queue'
+  (compiling source file 'CopyProcess.cpp')
+  
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(8,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(8,1): error C2086: 'int queue': redefinition
+      C:\Users\draga\Downloads\Replikacija\Replication\Common\unordered_map.h(29,1):
+      see declaration of 'queue'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(8,7): error C2146: syntax error: missing ';' before identifier 'messageBackup'
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(27,20): warning C4129: 'B': unrecognized character escape sequence
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(31,38): error C2065: 'messageBackup': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(33,28): warning C4129: 'B': unrecognized character escape sequence
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(33,91): error C2065: 'messageBackup': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(33,28): warning C4473: 'printf' : not enough arguments passed for format string
+      C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(33,28):
+      placeholders and their parameters expect 1 variadic arguments, but 0 were provided
+      C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(33,28):
+      the missing variadic argument 1 is required by format string '%d'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(35,45): error C2065: 'messageBackup': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(38,34): error C2065: 'messageBackup': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(86,6): error C2365: 'processDataFromCopy': redefinition; previous definition was 'function'
+      C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CPProcess.h(11,6):
+      see declaration of 'processDataFromCopy'
+  
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(86,33): error C2065: 'messageBackup': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(86,48): error C2275: 'Measurement': expected an expression instead of a type
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(86,60): error C2146: syntax error: missing ')' before identifier 'data'
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(87,1): error C2143: syntax error: missing ';' before '{'
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(87,1): error C2447: '{': missing function header (old-style formal list?)
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(94,20): warning C4129: '-': unrecognized character escape sequence
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(152,17): error C2065: 'messageBackup': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(158,72): error C2065: 'messageBackup': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(183,38): error C2065: 'messageBackup': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(196,30): error C2065: 'messageBackup': undeclared identifier
+C:\Users\draga\Downloads\Replikacija\Replication\CopyProcess\CopyProcess.cpp(197,25): error C2065: 'messageBackup': undeclared identifier
