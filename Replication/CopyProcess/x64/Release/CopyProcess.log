@@ -1,0 +1,12 @@
+﻿  CopyProcess.cpp
+C:\Users\GreyWorm\Desktop\Replication\CopyProcess\CopyProcess.cpp(27,20): warning C4129: 'B': unrecognized character escape sequence
+C:\Users\GreyWorm\Desktop\Replication\CopyProcess\CopyProcess.cpp(31,22): error C3861: 'is_queue_empty': identifier not found
+C:\Users\GreyWorm\Desktop\Replication\CopyProcess\CopyProcess.cpp(33,28): warning C4129: 'B': unrecognized character escape sequence
+C:\Users\GreyWorm\Desktop\Replication\CopyProcess\CopyProcess.cpp(35,29): error C3861: 'is_queue_empty': identifier not found
+C:\Users\GreyWorm\Desktop\Replication\CopyProcess\CopyProcess.cpp(38,25): error C3861: 'dequeue': identifier not found
+C:\Users\GreyWorm\Desktop\Replication\CopyProcess\CopyProcess.cpp(94,20): warning C4129: '-': unrecognized character escape sequence
+C:\Users\GreyWorm\Desktop\Replication\CopyProcess\CopyProcess.cpp(99,17): error C3861: 'is_queue_empty': identifier not found
+C:\Users\GreyWorm\Desktop\Replication\CopyProcess\CopyProcess.cpp(106,21): error C3861: 'enqueue': identifier not found
+C:\Users\GreyWorm\Desktop\Replication\CopyProcess\CopyProcess.cpp(152,5): error C3861: 'init_queue': identifier not found
+C:\Users\GreyWorm\Desktop\Replication\CopyProcess\CopyProcess.cpp(196,14): error C3861: 'is_queue_empty': identifier not found
+C:\Users\GreyWorm\Desktop\Replication\CopyProcess\CopyProcess.cpp(197,13): error C3861: 'free_queue': identifier not found

@@ -1,0 +1,2 @@
+﻿  Client.cpp
+LINK : fatal error LNK1181: cannot open input file 'C:\Users\GreyWorm\Desktop\Replication\x64\Release\Common.lib'

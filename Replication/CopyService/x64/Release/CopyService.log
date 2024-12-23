@@ -1,0 +1,5 @@
+﻿  CopyService.cpp
+C:\Users\GreyWorm\Desktop\Replication\CopyService\CopyService.cpp(201,13): warning C4101: 'iResult': unreferenced local variable
+  ServiceHelper.cpp
+C:\Users\GreyWorm\Desktop\Replication\CopyService\ServiceHelper.cpp(37,24): warning C4473: 'printf' : not enough arguments passed for format string
+LINK : fatal error LNK1181: cannot open input file 'C:\Users\GreyWorm\Desktop\Replication\x64\Release\Common.lib'

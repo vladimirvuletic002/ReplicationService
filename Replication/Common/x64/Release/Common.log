@@ -1,0 +1,9 @@
+﻿  Common.cpp
+C:\Users\GreyWorm\Desktop\Replication\Common\Common.cpp(31,10): warning C4101: 'recvbuf': unreferenced local variable
+C:\Users\GreyWorm\Desktop\Replication\Common\Common.cpp(124,9): warning C4101: 'choice': unreferenced local variable
+C:\Users\GreyWorm\Desktop\Replication\Common\Common.cpp(123,9): warning C4101: 'iResult': unreferenced local variable
+C:\Users\GreyWorm\Desktop\Replication\Common\Common.cpp(382,9): error C2664: 'void printer(std::unordered_map<int,queue,std::hash<int>,std::equal_to<int>,std::allocator<std::pair<const int,queue>>> &,std::unordered_map<int,std::mutex,std::hash<int>,std::equal_to<int>,std::allocator<std::pair<const int,std::mutex>>> &)': cannot convert argument 1 from 'unordered_map' to 'std::unordered_map<int,queue,std::hash<int>,std::equal_to<int>,std::allocator<std::pair<const int,queue>>> &'
+C:\Users\GreyWorm\Desktop\Replication\Common\Common.cpp(386,9): error C2664: 'void printer(std::unordered_map<int,queue,std::hash<int>,std::equal_to<int>,std::allocator<std::pair<const int,queue>>> &,std::unordered_map<int,std::mutex,std::hash<int>,std::equal_to<int>,std::allocator<std::pair<const int,std::mutex>>> &)': cannot convert argument 1 from 'unordered_map' to 'std::unordered_map<int,queue,std::hash<int>,std::equal_to<int>,std::allocator<std::pair<const int,queue>>> &'
+  Queue.cpp
+  req_queue.cpp
+  unordered_map.cpp

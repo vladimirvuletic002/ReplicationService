@@ -1,0 +1,12 @@
+﻿  Helper.cpp
+  Replication.cpp
+C:\Users\GreyWorm\Desktop\Replication\Replication\Replication.cpp(228,9): warning C4101: 'iResult': unreferenced local variable
+Replication.obj : error LNK2005: "class std::mutex socketMutex" (?socketMutex@@3Vmutex@std@@A) already defined in Helper.obj
+Replication.obj : error LNK2005: "struct unordered_map messageQueues" (?messageQueues@@3Uunordered_map@@A) already defined in Helper.obj
+Replication.obj : error LNK2005: "class std::condition_variable backupCondition" (?backupCondition@@3Vcondition_variable@std@@A) already defined in Helper.obj
+Replication.obj : error LNK2005: "class std::mutex messageMutex" (?messageMutex@@3Vmutex@std@@A) already defined in Helper.obj
+Replication.obj : error LNK2005: "class std::mutex backupMutex" (?backupMutex@@3Vmutex@std@@A) already defined in Helper.obj
+Replication.obj : error LNK2005: "class std::unordered_map<int,class std::mutex,struct std::hash<int>,struct std::equal_to<int>,class std::allocator<struct std::pair<int const ,class std::mutex> > > queueMtxs" (?queueMtxs@@3V?$unordered_map@HVmutex@std@@U?$hash@H@2@U?$equal_to@H@2@V?$allocator@U?$pair@$$CBHVmutex@std@@@std@@@2@@std@@A) already defined in Helper.obj
+Replication.obj : error LNK2005: "class std::condition_variable dataCondition" (?dataCondition@@3Vcondition_variable@std@@A) already defined in Helper.obj
+Replication.obj : error LNK2005: "class std::queue<unsigned __int64,class std::deque<unsigned __int64,class std::allocator<unsigned __int64> > > socketQueue" (?socketQueue@@3V?$queue@_KV?$deque@_KV?$allocator@_K@std@@@std@@@std@@A) already defined in Helper.obj
+LINK : fatal error LNK1181: cannot open input file 'C:\Users\GreyWorm\Desktop\Replication\x64\Release\Common.lib'

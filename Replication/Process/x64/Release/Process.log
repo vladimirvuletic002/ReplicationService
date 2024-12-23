@@ -1,0 +1,3 @@
+﻿  Process.cpp
+C:\Users\GreyWorm\Desktop\Replication\Process\Process.cpp(233,9): warning C4101: 'iResult': unreferenced local variable
+LINK : fatal error LNK1181: cannot open input file 'C:\Users\GreyWorm\Desktop\Replication\x64\Release\Common.lib'
