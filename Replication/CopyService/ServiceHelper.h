@@ -8,3 +8,4 @@ bool ProcessDataTransfer33(SOCKET& clientSocket, SOCKET processSocket, Measureme
 void HandleBackupRequest22(SOCKET& clientSocket, SOCKET processSockets[
 ], Measurement& m, Measurement& measure, std::atomic<bool>& info,bool& stopFlag);
 void startProcessInCurrentDirectory(const std::wstring& processName);
+bool receiveFull(SOCKET socket, char* buffer, int totalBytes);

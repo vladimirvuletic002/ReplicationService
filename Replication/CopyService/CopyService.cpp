@@ -1,6 +1,7 @@
 ﻿#include "ServiceHelper.h"
 #include "../Common/unordered_map.h"
 #include "../Common/unordered_mtx_map.h"
+#include "../Common/unordered_condVar_map.h"
 
 #define COPY_SERVER_IP_ADDRESS "127.0.0.3"
 #define DEFAULT_BUFLEN 512
@@ -20,7 +21,8 @@ std::condition_variable processConnection;
 
 unordered_map messageQueues;
 unordered_mtx_map queueMtxs;
-std::unordered_map<int, std::condition_variable> dataCondition;
+//std::unordered_map<int, std::condition_variable> dataCondition;
+unordered_condVar_map dataCondition;
 
 std::atomic<bool> info = false;
 
@@ -61,32 +63,75 @@ DWORD WINAPI EnqueueAndNotifyThread(LPVOID lparm) {
         }
 
         while (!stopFlag) {
+            fd_set readfds;
+            FD_ZERO(&readfds);
+            FD_SET(socket, &readfds);
 
-            int bytesReceived = recv(socket, (char*)&data, sizeof(Measurement), 0);
-            
-            if (bytesReceived <= 0) {
+            timeval timeout;
+            timeout.tv_sec = 0;
+            timeout.tv_usec = 200 * 1000; // 200ms
+
+            int ready = select(0, &readfds, nullptr, nullptr, &timeout);
+
+            if (ready > 0 && FD_ISSET(socket, &readfds)) {
+                int bytesReceived = recv(socket, (char*)&data, sizeof(Measurement), 0);
+
+
+
+                if (bytesReceived <= 0) {
+                    closesocket(socket);
+                    break;
+                }
+                else {
+                    char ack = 'A';
+                    send(socket, &ack, 1, 0);
+
+                    if (contains_key(&messageQueues, data.deviceId) == 0) {
+                        queue* newQ = (queue*)malloc(sizeof(queue));
+                        init_queue(newQ);
+                        insert_queue_to_map(&messageQueues, data.deviceId, newQ);
+                    }
+
+
+
+                    if (contains_key_mtx(&queueMtxs, data.deviceId) == 0)
+                        insert_mtx_to_map(&queueMtxs, data.deviceId);
+                    std::mutex* mtx = get_mtx_for_key(&queueMtxs, data.deviceId);
+
+                    if (contains_key_condVar(&dataCondition, data.deviceId) == 0)
+                        insert_condVar_to_map(&dataCondition, data.deviceId);
+
+                    std::condition_variable* cv = get_condVar_for_key(&dataCondition, data.deviceId);
+
+                    if (mtx == NULL) {
+                        return -1;
+                    }
+
+                    if (EnqueueToMap(*mtx, messageQueues, data)) {
+                        //printf("\nPRVA PORUKA ENKJUOVANA U MAPU IDEMO BRE!\n");
+
+                        //printf("\n[DEBUG][%d] notify_all() POZVAN!", data.deviceId);
+                        (*cv).notify_all();
+
+                    }
+
+                }
+            }
+            else if (ready == 0) {
+                // timeout — nema podataka, ali proveri stopFlag i nastavi!
+                continue;
+            }
+            else {
+                // select error, socket zatvoren ili neka greška
                 closesocket(socket);
                 break;
             }
-            else if (bytesReceived > 0) {
 
-                insert_mtx_to_map(&queueMtxs, data.deviceId);
-                std::mutex* mtx = get_mtx_for_key(&queueMtxs, data.deviceId);
-
-                if (mtx == NULL) {
-                    return -1;
-                }
-
-                if (EnqueueToMap(*mtx, messageQueues, data)) {
-                    dataCondition[data.deviceId].notify_all();
-
-                }
-                
-            }
         }
     }
 
 }
+
 
 DWORD WINAPI getDataFromQueueThread(LPVOID lParam) {
     int ProcessId = *(int*)lParam;
@@ -95,74 +140,70 @@ DWORD WINAPI getDataFromQueueThread(LPVOID lParam) {
     printf("\nThread active for process ID = %d", ProcessId);
 
     while (true) {
-
         {
             std::unique_lock<std::mutex> lock(socketMtxQueue);
             processConnection.wait(lock, [] { return !is_req_queue_empty(&socketProcessQueue) || stopFlag == true; });
 
             if (stopFlag == false) {
                 socket = dequeue_request(&socketProcessQueue);
+                //printf("\n----[DEBUG]PROCES SA ID-EM: %d PREUZET ZAHTEV!-----\n", ProcessId);
             }
             else {
                 printf("\n\t\t\t\tThread stopped.");
                 return 1;
             }
-        }   
-    //    printf("\nWaiting for data on thread for process ID = %d ", ProcessId);
-            while (true) {
-                insert_mtx_to_map(&queueMtxs, ProcessId);
-                std::mutex* procMtx = get_mtx_for_key(&queueMtxs, ProcessId);
+        }
 
-                if (procMtx == NULL) {
-                    return -1;
-                }
+        printf("\nWaiting for data on thread for process ID = %d ", ProcessId);
+        while (true) {
+            if (contains_key_mtx(&queueMtxs, ProcessId) == 0)
+                insert_mtx_to_map(&queueMtxs, ProcessId);
+            std::mutex* procMtx = get_mtx_for_key(&queueMtxs, ProcessId);
+
+            if (procMtx == NULL) {
+                return -1;
+            }
+
+            {
+                std::unique_lock<std::mutex> lock(*procMtx);
+                if (contains_key_condVar(&dataCondition, ProcessId) == 0)
+                    insert_condVar_to_map(&dataCondition, ProcessId);
+                std::condition_variable* cv = get_condVar_for_key(&dataCondition, ProcessId);
+                //printf("\n[DEBUG][%d] Thread ulazi u WAIT (prethodno proverio queue)!", ProcessId);
+                (*cv).wait(lock, [ProcessId] { return !is_queue_empty(get_queue_for_key(&messageQueues, ProcessId)) || stopFlag == true; });
+            }
+            if (stopFlag == false) {
 
                 {
-                    std::unique_lock<std::mutex> lock(*procMtx);
-                    dataCondition[ProcessId].wait(lock, [ProcessId] { return !is_queue_empty(get_queue_for_key(&messageQueues,ProcessId)) || stopFlag == true; });
-                }
-                    if (stopFlag == false) {
+                    //std::unique_lock<std::mutex> lock(*procMtx);
+                    Measurement m;
+                    SafeDequeue(get_queue_for_key(&messageQueues, ProcessId), *procMtx, &m);
+                    //printf("\n[DEBUG][% d] ODRADIO DEQUEUE!", ProcessId);
 
-                        {
-                         // std::unique_lock<std::mutex> lock(queueMtxs[ProcessId]);
-                            Measurement m;
-                            SafeDequeue(get_queue_for_key(&messageQueues,ProcessId), *procMtx, &m);
-
-                            if (send(socket, (const char*)&m, sizeof(Measurement), 0)>0) {
-                               
-                                    counter++;
-                                    if (counter % 10000 == 0) {
-                                        printf("\n\t\t\t\tMessage sent to process ID:%d :::%d",m.deviceId, counter.load());
-                                    }
-                                    if (info)
-                                    printf("\n\t\t\t\tSent to process ID - %d\t Message counter: %d", ProcessId, counter.load());
-                                
-                            }
-                            else {
-                                printf("\nFailed to send, message going back to temporary queue");
-                                SafeEnqueue(get_queue_for_key(&messageQueues,ProcessId), *procMtx, m);
-                            }
-
+                    if (send(socket, (const char*)&m, sizeof(Measurement), 0) > 0) {
+                        counter++;
+                        //printf("\n[DEBUG][%d] Šaljem poruku iz queue-a procesu!", ProcessId);
+                        if (counter % 10000 == 0) {
+                            printf("\n\t\t\t\tMessage sent to process ID:%d :::%d", m.deviceId, counter.load());
                         }
+                        if (info)
+                            printf("\n\t\t\t\tSent to process ID - %d\t Message counter: %d", ProcessId, counter.load());
+
                     }
                     else {
-                        printf("\n\t\t\t\tThread stopped.");
-                        return 1;
+                        printf("\nFailed to send, message going back to temporary queue");
+                        SafeEnqueue(get_queue_for_key(&messageQueues, ProcessId), *procMtx, m);
                     }
+
                 }
-                
+            }
+            else {
+                printf("\n\t\t\t\tThread stopped.");
+                return 1;
+            }
+        }
+
     }
-
-
-}
-
-
-
-
-
-void makeSocketNonBlocking(SOCKET socket) {
-    u_long mode = 1; // 1 to enable non-blocking mode
-    ioctlsocket(socket, FIONBIO, &mode);
 }
 
 
@@ -225,8 +266,13 @@ DWORD WINAPI getMessagesThread(LPVOID lpParam) {
             ioctlsocket(clientSocket, FIONBIO, &mode);
 
             int bytesReceived = recv(clientSocket, (char*)&measure, sizeof(Measurement), 0);
+            
             if (bytesReceived > 0) {
                 printf("\nReceived data request, searching for process with requested queue ID...");
+
+                char ack = 'A';
+                send(clientSocket, &ack, 1, 0);
+
                 makeSocketNonBlocking(clientSocket);
               switch (ReceiveWithNonBlockingSocket(stopFlag, clientSocket, m)) {
                 case END:
@@ -241,7 +287,7 @@ DWORD WINAPI getMessagesThread(LPVOID lpParam) {
                     mode = 0; // 0 for blocking mode
                     ioctlsocket(clientSocket, FIONBIO, &mode);
                     HandleBackupRequest22(clientSocket, processSockets, m, measure,info,stop);
-                    break;        //
+                    break;        
                
                 default:
                     break;
@@ -266,7 +312,7 @@ DWORD WINAPI getMessagesThread(LPVOID lpParam) {
     if(processMessages!=INVALID_SOCKET)
     closesocket(processMessages);
 
-    if(processMessages!=INVALID_SOCKET)
+    if(getMessages!=INVALID_SOCKET)
     closesocket(getMessages);
     return 1;
  }
@@ -383,8 +429,11 @@ DWORD WINAPI acceptorThread(LPVOID lpParam) {
 }
 
 int main() {
+    
     init_req_queue(&socketQueue, 16);
     init_req_queue(&socketProcessQueue, 16);
+
+	init_condVar_map(&dataCondition);
 
     init_map(&messageQueues);
     init_mtx_map(&queueMtxs);
@@ -413,16 +462,18 @@ int main() {
     HANDLE acceptorProc = CreateThread(nullptr, 0, acceptorThread, &processP, 0, nullptr);
     HANDLE backupThread = CreateThread(nullptr, 0, getMessagesThread, nullptr, 0, nullptr);
 
+    int threadId[3];
+    for (int i = 0; i < PROCESS_POOL_SIZE; i++) {
+        threadId[i] = i + 1;
+        workerProcThreads[i] = CreateThread(nullptr, 0, getDataFromQueueThread, &threadId[i], 0, nullptr);
+    }
+
     for (int i = 0; i < THREAD_POOL_SIZE; i++) {
       
         workerThreads[i] = CreateThread(nullptr, 0, EnqueueAndNotifyThread, &messageQueues, 0, nullptr);
     }
 
-    int threadId[3];
-    for (int i = 0; i < PROCESS_POOL_SIZE;i++) {
-        threadId[i] = i + 1;
-        workerProcThreads[i] = CreateThread(nullptr, 0,getDataFromQueueThread, &threadId[i], 0, nullptr);
-    }
+    
     // Wait for user input to shut down the server
     InputCommands();
    
@@ -437,7 +488,10 @@ int main() {
     
     // Wait for threads to exit
     WaitForMultipleObjects(THREAD_POOL_SIZE, workerThreads, TRUE, INFINITE);
+    WaitForMultipleObjects(PROCESS_POOL_SIZE, workerProcThreads, TRUE, INFINITE);
     WaitForSingleObject(acceptor, INFINITE);
+    WaitForSingleObject(backupThread, INFINITE);
+    WaitForSingleObject(acceptorProc, INFINITE);
 
     // Cleanup
     for (int i = 0; i < THREAD_POOL_SIZE; i++) {
@@ -449,26 +503,45 @@ int main() {
         CloseHandle(workerProcThreads[i]);
     }
 
+    CloseHandle(acceptor);
+    CloseHandle(acceptorProc);
+    CloseHandle(backupThread);
+
+
+    while (!is_req_queue_empty(&socketQueue)) {
+        SOCKET sock = dequeue_request(&socketQueue);
+        if (sock != INVALID_SOCKET) {
+            closesocket(sock);
+        }
+    }
+
+    while (!is_req_queue_empty(&socketProcessQueue)) {
+        SOCKET sock = dequeue_request(&socketProcessQueue);
+        if (sock != INVALID_SOCKET) {
+            closesocket(sock);
+        }
+    }
+
     free_req_queue(&socketQueue);
     free_req_queue(&socketProcessQueue);
 
     free_map(&messageQueues);
     free_mtx_map(&queueMtxs);
+
+    free_condVar_map(&dataCondition);
    
-    CloseHandle(acceptor);
-    CloseHandle(acceptorProc);
-    CloseHandle(backupThread);
-    closesocket(serviceListener);
-    closesocket(processListener);
+
+    if (serviceListener != INVALID_SOCKET)
+        closesocket(serviceListener);
+
+    if (processListener != INVALID_SOCKET)
+        closesocket(processListener);
+
     WSACleanup();
 
     std::cout << "\n\n\n\t\t\t\tDone. Copy server shut down." << std::endl;
     Sleep(2000);
     //std::cout << "Server shut down." << std::endl;
     return 0;
-
-
-
-
 }
 

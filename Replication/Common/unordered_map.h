@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define INITIAL_CAPACITY 16
+#define INITIAL_CAPACITY 3
 #define LOAD_FACTOR 0.75
 
 

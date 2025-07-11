@@ -1,8 +1,1 @@
-﻿  CopyProcess.cpp
-C:\Users\draga\Downloads\Replication (1)\Replication\CopyProcess\CopyProcess.cpp(27,20): warning C4129: 'B': unrecognized character escape sequence
-C:\Users\draga\Downloads\Replication (1)\Replication\CopyProcess\CopyProcess.cpp(33,28): warning C4129: 'B': unrecognized character escape sequence
-C:\Users\draga\Downloads\Replication (1)\Replication\CopyProcess\CopyProcess.cpp(16,9): warning C4101: 'iResult': unreferenced local variable
-C:\Users\draga\Downloads\Replication (1)\Replication\CopyProcess\CopyProcess.cpp(94,20): warning C4129: '-': unrecognized character escape sequence
-C:\Users\draga\Downloads\Replication (1)\Replication\CopyProcess\CopyProcess.cpp(142,9): warning C4101: 'choice': unreferenced local variable
-C:\Users\draga\Downloads\Replication (1)\Replication\CopyProcess\CopyProcess.cpp(141,9): warning C4101: 'iResult': unreferenced local variable
-  CopyProcess.vcxproj -> C:\Users\draga\Downloads\Replication (1)\Replication\x64\Debug\CopyProcess.exe
+﻿LINK : fatal error LNK1168: cannot open C:\Users\draga\Documents\IKP\ReplicationService\Replication\x64\Debug\CopyProcess.exe for writing

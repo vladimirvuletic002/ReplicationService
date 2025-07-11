@@ -19,14 +19,9 @@ std::atomic<int> counter = 0;
 std::atomic<int> confirmedMess = 0;
 
 
-void makeSocketNonBlocking(SOCKET socket) {
-    u_long mode = 1; // 1 to enable non-blocking mode
-    ioctlsocket(socket, FIONBIO, &mode);
-}
-
 std::atomic<bool> info = false;   ///Don't print for faster transmission
 ///////////////////////////////////////////////////////////////////////
-DWORD WINAPI handleClients(LPVOID lparm) {
+/*DWORD WINAPI handleClients(LPVOID lparm) {
     bool serverConn;
     SOCKET socket;
     SOCKET serviceSocket;
@@ -68,10 +63,13 @@ DWORD WINAPI handleClients(LPVOID lparm) {
                     printf("Send failed with error: %d\n\n Connection with server lost... [ Still have client, saving data to Temporary queue... ]\n", WSAGetLastError());
                     closesocket(serviceSocket);
                     serverConn = false;
+
+
+
                     continue;
 
                 }
-                if (data.purpose == 99) {
+                if (data.purpose == 99) { // backup
 
                     std::atomic<bool> stop = false;
                     SOCKET connect = Connector(SERVER_IP_ADDRESS, 8500);
@@ -92,7 +90,7 @@ DWORD WINAPI handleClients(LPVOID lparm) {
                     continue;
                 }
                 if (data.purpose != 8) {
-                    printf("\n\n---------Podaci primljeni od uredjaja:---------\n");
+                    printf("\n\n---------Data received from device:---------\n");
                     printMeasurement(&data);
                 }
 
@@ -119,7 +117,139 @@ DWORD WINAPI handleClients(LPVOID lparm) {
          
          }
         
-     }
+     }*/
+
+DWORD WINAPI handleClients(LPVOID lparm) {
+    SOCKET socket;
+    SOCKET serviceSocket = INVALID_SOCKET;
+    Measurement data;
+    queue* messageQueue = (queue*)lparm;
+    bool serverConn = false;
+    int iResult = 0;
+
+    while (!stopFlag) {
+        // Čekaj novi klijent
+        {
+            std::unique_lock<std::mutex> lock(socketMutex);
+            dataCondition.wait(lock, [] { return !is_req_queue_empty(&socketQueue) || stopFlag == true; });
+
+            if (stopFlag) {
+                printf("Server stopped\n");
+                return 1;
+            }
+
+            socket = dequeue_request(&socketQueue);
+        }
+
+        printf("\nClient connected.\n");
+
+        // Gornja petlja šalje klijentu backup ako traži, sve ostale poruke šalje serveru ili u temporaryQueue
+        while (!stopFlag) {
+            // 1. UVEK POKUŠAJ RECONNECT NA SERVER AKO NIJE POVEZAN
+            while (!serverConn && !stopFlag) {
+                serviceSocket = Connector(SERVER_IP_ADDRESS, 8000);
+                if (serviceSocket != INVALID_SOCKET) {
+                    printf("[RECONNECT] Connected to server!\n");
+
+                    // POKUŠAJ DA POŠALJEŠ SVE IZ temporaryQueue
+                    while (!is_queue_empty(&temporaryQueue)) {
+                        Measurement tempMsg;
+                        {
+                            std::unique_lock<std::mutex> lock(messageMutex);
+                            dequeue(&temporaryQueue, &tempMsg);
+                        }
+                        int tempSend = send(serviceSocket, (const char*)&tempMsg, sizeof(Measurement), 0);
+                        if (tempSend == SOCKET_ERROR) {
+                            printf("Retry from tempQueue FAILED, returning message back and retrying connection...\n");
+                            std::unique_lock<std::mutex> lock(messageMutex);
+                            enqueue(&temporaryQueue, tempMsg); // vrati nazad
+                            closesocket(serviceSocket);
+                            serviceSocket = INVALID_SOCKET;
+                            break; // Vrati se na reconnect petlju
+                        }
+                    }
+                    if (is_queue_empty(&temporaryQueue)) {
+                        serverConn = true; // Sva poruke iz reda su poslate!
+                    }
+                }
+                else {
+                    printf("[RECONNECT] Server unavailable, retrying in 1s...\n");
+                    Sleep(1000);
+                }
+            }
+            if (stopFlag) break;
+
+            // 2. PRIMI NOVU PORUKU OD KLIJENTA (ili client disconnect)
+            int bytesReceived = recv(socket, (char*)&data, sizeof(Measurement), 0);
+            if (bytesReceived <= 0) {
+                printf("\n-------------Client left...\n");
+                break;
+            }
+
+            // 3. SPECIJALAN SLUČAJ: BACKUP ZAHTEV
+            if (data.purpose == 99) {
+                std::atomic<bool> stop = false;
+                SOCKET connect = Connector(SERVER_IP_ADDRESS, 8500);
+                makeSocketNonBlocking(connect);
+                while (!stop) {
+                    int non = nonBlockingReceive(stopFlag, connect, data, stop, info);
+                    if (non != SKIP && non != END) {
+                        if (info)
+                            printf("\nBackup received from server \n");
+                        printMeasurement(&data);
+                        send(socket, (const char*)&data, sizeof(Measurement), 0);
+                    }
+                }
+                printf("\nBackup for client done.");
+                data.purpose = END_OF_QUEUE;
+                send(socket, (const char*)&data, sizeof(Measurement), 0);
+                closesocket(connect);
+                continue;
+            }
+
+            // 4. POKUŠAJ DA POŠALJEŠ SERVERU!
+            if (serverConn) {
+                iResult = send(serviceSocket, (const char*)&data, sizeof(Measurement), 0);
+                if (iResult == SOCKET_ERROR) {
+                    printf("Send failed! Saving message to temporaryQueue and disconnecting.\n");
+                    serverConn = false;
+                    closesocket(serviceSocket);
+                    serviceSocket = INVALID_SOCKET;
+
+                    // ČUVAJ U temporaryQueue!
+                    std::unique_lock<std::mutex> lock(messageMutex);
+                    enqueue(&temporaryQueue, data);
+                }
+            }
+            else {
+                // Server nije konektovan, ČUVAJ U temporaryQueue!
+                std::unique_lock<std::mutex> lock(messageMutex);
+                enqueue(&temporaryQueue, data);
+            }
+
+            // STATISTIKA I ISPISI:
+            if (data.purpose != 8) {
+                printf("\n\n---------Data received from device:---------\n");
+                printMeasurement(&data);
+            }
+            {
+                std::unique_lock<std::mutex> lock(messageMutex);
+                if (data.purpose != 99) {
+                    enqueue(messageQueue, data);
+                    counter++;
+                }
+            }
+            confirmedMess++;
+            if (info) {
+                std::cout << "\nID : " << data.deviceId << "\tMessages received : " << counter << "\tMessages successfully sent : " << confirmedMess;
+            }
+        }
+
+        // Na kraju (client disconnect): očisti socket
+        closesocket(socket);
+    }
+    return 0;
+}
 
 
 //Cant properly turn of cuz of BLOCKING
@@ -138,8 +268,19 @@ DWORD WINAPI acceptorThread(LPVOID lpParam) {
             dataCondition.notify_one();  // Notify one thread in the thread pool
         }
         else {
-            printf("\n\nServer on port already running... shutting down...\n");
-            break;
+            //printf("\n\nServer on port already running... shutting down...\n");
+            //break;
+            int errCode = WSAGetLastError();
+            if (errCode == WSAEWOULDBLOCK) {
+                // Nema konekcije, pokušaj opet za 100ms
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                continue;
+            }
+            else {
+                printf("\n\nServer accept error: %d\n", errCode);
+                std::this_thread::sleep_for(std::chrono::seconds(2));
+                continue;
+            }
         }
     }
     return 0;
@@ -264,17 +405,23 @@ int main() {
     WaitForMultipleObjects(THREAD_POOL_SIZE, workerThreads, TRUE, INFINITE);
     WaitForSingleObject(acceptor, INFINITE);
 
-    if (is_req_queue_empty(&socketQueue)) {
-        free_req_queue(&socketQueue);
-    }
-
     // Cleanup
     for (int i = 0; i < THREAD_POOL_SIZE; i++) {
         CloseHandle(workerThreads[i]);
     }
-   
-    if (acceptor != INVALID_HANDLE_VALUE)
+
     CloseHandle(acceptor);
+
+
+    while (!is_req_queue_empty(&socketQueue)) {
+        SOCKET sock = dequeue_request(&socketQueue);
+        if (sock != INVALID_SOCKET) {
+            closesocket(sock);
+        }
+    }
+
+    free_req_queue(&socketQueue);
+    
 
     closesocket(serverSocket);
     WSACleanup();

@@ -25,7 +25,9 @@ bool ProcessDataTransfer33(SOCKET& clientSocket, SOCKET processSocket, Measureme
 
                 break;
 
-            } if (m.purpose == EMPTY_QUEUE) {
+            } 
+            
+            if (m.purpose == EMPTY_QUEUE) {
 
                 send(clientSocket, (const char*)&m, sizeof(Measurement), 0);
                 data = true;
@@ -33,19 +35,27 @@ bool ProcessDataTransfer33(SOCKET& clientSocket, SOCKET processSocket, Measureme
                 break;
 
             }
-                if(info==true)
-                printf("\n\nBackup REQUEST received from process, sending to original service %d :---------\n");
-                printMeasurement(&m);
+            if (info == true) {
+                if (m.purpose != END_OF_QUEUE) {
+                    printf("\n\nBackup REQUEST received from process, sending to original service %d :---------\n", m.deviceId);
+                    printMeasurement(&m);
+                }
                 
-                int res=send(clientSocket, (const char*)&m, sizeof(Measurement), 0);
-                if (res <= 0) { stopFlag = true; }
+            }
+                
+            int res = send(clientSocket, (const char*)&m, sizeof(Measurement), 0);
+            if (res <= 0) { stopFlag = true; }
+                
+            
             if (m.purpose == END_OF_QUEUE) {
 
-                printf("\nData transfer stopped");
-                data = true;
-                break;
-
+            printf("\nData transfer stopped");
+            data = true;
+            break;
             }
+
+            
+
         }
         else {
             stopFlag = true;
@@ -77,6 +87,7 @@ void HandleBackupRequest22(SOCKET& clientSocket, SOCKET processSockets[3], Measu
         m.purpose = 0;
     }
 }
+
 
 std::wstring stringToWString(const std::string& str) {
     int size_needed = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), -1, NULL, 0);

@@ -30,6 +30,9 @@
     <ClCompile Include="unordered_mtx_map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="unordered_condVar_map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h">
@@ -45,6 +48,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="unordered_mtx_map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="unordered_condVar_map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -37,12 +37,6 @@ req_queue backupConnections;
 
 
 
-void makeSocketNonBlocking(SOCKET socket) {
-    u_long mode = 1; // 1 to enable non-blocking mode
-    ioctlsocket(socket, FIONBIO, &mode);
-}
-
-
 void InitializeQu(Measurement data,int &currentId) {
     
     if (data.deviceId > 0 && data.deviceId <= NUMBER_OF_POSSIBLE_IDS) {
@@ -51,6 +45,7 @@ void InitializeQu(Measurement data,int &currentId) {
             queue q;
             init_queue(&q);
             insert_queue_to_map(&messageQueues, data.deviceId, &q);
+            insert_mtx_to_map(&queueMtxs, data.deviceId);
         }
         currentId = data.deviceId;
     }
@@ -58,77 +53,70 @@ void InitializeQu(Measurement data,int &currentId) {
 
 
 
+/////////////
 DWORD WINAPI handleProcesses(LPVOID lparm) {
     SOCKET socket;
     SOCKET copyServiceSocket = INVALID_SOCKET;
     int currentId = -1;
     Measurement data;
     queue* messageQueue = (queue*)lparm;
-    
-
-    int TotalPerThread = 0;
 
     while (true) {
-
         {
             currentId = -1;
             std::unique_lock<std::mutex> lock(socketMutex);
-            dataCondition.wait(lock, [] { return !is_req_queue_empty(&socketQueue) || stopFlag == true; });
-           
-            backup = false;
-            
+            dataCondition.wait(lock, [] { return !is_req_queue_empty(&socketQueue) || stopFlag; });
 
-            if (stopFlag == false) {
-                copyServiceSocket = Connector(COPY_SERVER_IP_ADDRESS, 7000);
+            backup = false;
+
+            if (!stopFlag) {
                 socket = dequeue_request(&socketQueue);
-                
+                if (socket == INVALID_SOCKET)
+                    continue;
             }
             else {
                 printf("\n\t\t\t\tThread finished.");
-                if(copyServiceSocket)
-                closesocket(copyServiceSocket);
+                if (copyServiceSocket != INVALID_SOCKET)
+                    closesocket(copyServiceSocket);
                 return 1;
             }
         }
         makeSocketNonBlocking(socket);
-      //  printfP("Waiting for data...\t\t[\tPress enter for menu!\t]", nullptr,totalMessages.load(), totalBackup.load());
+
         while (true) {
-
-
             int bytesReceived = recv(socket, (char*)&data, sizeof(Measurement), 0);
 
             if (bytesReceived <= 0 || stopFlag) {
-
-                if (stopFlag == true) {
-                    closesocket(copyServiceSocket);
-                    closesocket(socket);
+                if (stopFlag) {
+                    if (copyServiceSocket != INVALID_SOCKET)
+                        closesocket(copyServiceSocket);
+                    if (socket != INVALID_SOCKET)
+                        closesocket(socket);
                     printf("\n\n\t\t\t\tForce server shutdown! ID ---> %d\n\b", currentId);
-                    break;
-
+                    //break;
+                    return 1;
                 }
                 int error = WSAGetLastError();
                 if (error == WSAEWOULDBLOCK) {
-                    // No data available yet; wait and retry
                     std::this_thread::sleep_for(std::chrono::milliseconds(150));
                     continue;
                 }
                 else {
-                  closesocket(copyServiceSocket);
-                  closesocket(socket);
+                    if (copyServiceSocket != INVALID_SOCKET)
+                        closesocket(copyServiceSocket);
+                    if (socket != INVALID_SOCKET)
+                        closesocket(socket);
                     std::cerr << "\n\t\t\tConnection with process closed : Error: " << error << '\n';
                     break;
                 }
+            }
 
- 
-            }           
             if (currentId == -1) {
                 InitializeQu(data, currentId);
             }
 
-
-            if (currentId == data.deviceId) {                   
-                
-                if (data.purpose == 99) {//Client initiated backup
+            if (currentId == data.deviceId) {
+                if (data.purpose == 99) { // Client initiated backup
                     printf("\nCLIENT INITIATED BACKUP");
                     currentBackupChoice = data.deviceId;
                     backup = true;
@@ -137,57 +125,103 @@ DWORD WINAPI handleProcesses(LPVOID lparm) {
                     continue;
                 }
 
-                insert_mtx_to_map(&queueMtxs, currentBackupChoice);
-                std::mutex* mtxForDevice = get_mtx_for_key(&queueMtxs, currentBackupChoice);
+                insert_mtx_to_map(&queueMtxs, data.deviceId);
+                std::mutex* mtxForDevice = get_mtx_for_key(&queueMtxs, data.deviceId);
+                queue* qForDevice = get_queue_for_key(&messageQueues, data.deviceId);
 
-                if (mtxForDevice == NULL) {
-                    std::cerr << "Mutex for key " << currentBackupChoice << " not found!\n";
-                    return -1;
+                if (mtxForDevice == NULL || qForDevice == NULL) {
+                    std::cerr << "Mutex or queue for key " << data.deviceId << " not found!\n";
+                    continue;
                 }
 
-                if (SendMessageQ(copyServiceSocket,data,get_queue_for_key(&messageQueues, data.deviceId), *mtxForDevice)) {
-
-                            
-                           
-                            if (data.purpose != 8) {
-                                printfP("New manually sent data", &data,totalMessages.load(), totalBackup.load());
-                            }
-                            {                               
-                                std::unique_lock<std::mutex> lock(messageCounter);
-                                totalMessages++;
-                                if (totalMessages % 1000==0)
-                                    printf("\n\t\t\t\tTotal messages received = %d\n\t\t\t\tSuccessfully forwarded to copy server.\n", totalMessages.load());
-   
-                            }
+                {
+                    std::unique_lock<std::mutex> lock(*mtxForDevice);
+                    enqueue(qForDevice, data); // UVEK enqueue!
                 }
-                    else {
-                        printf("\nFailed to send to copy service.Trying to connect again!");//////////////////////////////////////////////////////////////////////
-                        Sleep(1000);
-                        copyServiceSocket = Connector(COPY_SERVER_IP_ADDRESS, 7000);
-                        if (copyServiceSocket == INVALID_SOCKET) {
-                            printf("\n\nFAILED TO RECONNECT TO COPY SERVICE!");
-                            stopFlag = true;
-                            
-                        }
-                    }
-
-                  
                 
             }
-           
         }
-        if (copyServiceSocket != INVALID_SOCKET) {
+        /*if (copyServiceSocket != INVALID_SOCKET) {
             closesocket(copyServiceSocket);
             printf("\n\t\t\tService socket closed");
         }
         if (socket != INVALID_SOCKET) {
             closesocket(socket);
             printf("\n\t\t\tProcess socket closed");
+        }*/
+        //closesocket(socket);
+        //printf("\n\t\t\tProcess socket closed");
+    }
+    return 1;
+}
+
+
+DWORD WINAPI QueueDeliveryThread(LPVOID lpParam) {
+    // Za svaki device, drži poseban socket
+    SOCKET deviceSockets[NUM_DEVICES + 1] = { INVALID_SOCKET }; // deviceId ide od 1!
+    while (!stopFlag) {
+        for (int deviceId = 1; deviceId <= NUM_DEVICES; ++deviceId) {
+            std::mutex* mtx = get_mtx_for_key(&queueMtxs, deviceId);
+            queue* q = get_queue_for_key(&messageQueues, deviceId);
+            if (!mtx || !q) continue;
+
+            while (true) {
+                Measurement m;
+                {
+                    std::unique_lock<std::mutex> lock(*mtx);
+                    if (is_queue_empty(q)) break;
+                    m = q->head->data;
+                }
+
+                // PERSISTENT CONNECTION: koristi isti socket dok ne pukne!
+                if (deviceSockets[deviceId] == INVALID_SOCKET) {
+                    deviceSockets[deviceId] = Connector(COPY_SERVER_IP_ADDRESS, 7000);
+                    if (deviceSockets[deviceId] == INVALID_SOCKET) {
+                        printf("\n[QUEUE->COPY] CopyService unavailable (dev=%d), sleeping 1s...\n", deviceId);
+                        std::this_thread::sleep_for(std::chrono::seconds(10));
+                        break;
+                    }
+                    printf("\n[QUEUE->COPY] Opened persistent connection for device %d\n", deviceId);
+                }
+                SOCKET s = deviceSockets[deviceId];
+
+                if (SendMessageTo(s, m)) {
+                    // ACK stigao, sad izbrisi poruku iz reda
+                    {
+                        std::unique_lock<std::mutex> lock(*mtx);
+                        Measurement tmp; dequeue(q, &tmp);
+                    }
+                    if (m.purpose != 8) {
+                        printfP("New manually sent data", &m, totalMessages.load(), totalBackup.load());
+                    }
+                    {
+                        std::unique_lock<std::mutex> lock(messageCounter);
+                        totalMessages++;
+                        if (totalMessages % 1000 == 0)
+                            printf("\n\t\t\t\tTotal messages received = %d\n\t\t\t\tSuccessfully forwarded to copy server.\n", totalMessages.load());
+                    }
+                }
+                else {
+                    // greska -- ZATVORI socket i postavi na INVALID_SOCKET, pa sledeci put radi reconnect!
+                    closesocket(s);
+                    deviceSockets[deviceId] = INVALID_SOCKET;
+                    printf("\n[QUEUE->COPY] Failed to send, will retry after reconnect (dev=%d)\n", deviceId);
+                    std::this_thread::sleep_for(std::chrono::seconds(1));
+                    break;
+                }
+            }
         }
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
+    for (int i = 1; i <= NUM_DEVICES; ++i) {
+        if (deviceSockets[i] != INVALID_SOCKET)
+            closesocket(deviceSockets[i]);
+    }
+    return 0;
 }
-/////////////
+
+
 
 DWORD WINAPI handleBackupToClient(LPVOID lpParam) {
     Measurement m;
@@ -228,12 +262,14 @@ DWORD WINAPI handleBackupToClient(LPVOID lpParam) {
                             if (totalBackup % 1000 == 0)
                                 printf("\n\t\t\t\tSending backup to process: %d", totalBackup.load());
                         
-                            totalBackup--;
-                        if (!SendMessageTo(socket, m)) {
-
+                            
+                            //if (!SendMessageTo(socket, m)) {
+                            if(send(socket, (const char*)&m, sizeof(Measurement), 0) <=0){
                             enqueue(currBackupQ, m);
-                            totalBackup++;
-                        }
+                            }
+                            else {
+                                totalBackup--;
+                            }
 
                     }
                     printf("\n\t\t\tBackup sent.");
@@ -269,27 +305,28 @@ DWORD WINAPI getMessagesThread(LPVOID lpParam) {
         }
         if (stopFlag)break;
 
-            backupRequest = Connector(COPY_SERVER_IP_ADDRESS, 9000);
-               if (backupRequest == INVALID_SOCKET) {
-                   printf("\nCant connect to copy service...");
-                   closesocket(backupRequest); continue;
-                }
+        backupRequest = Connector(COPY_SERVER_IP_ADDRESS, 9000);
+        if (backupRequest == INVALID_SOCKET) {
+            printf("\nCant connect to copy service...");
+            closesocket(backupRequest); continue;
+        }
 
-            m.deviceId = currentBackupChoice;
-            m.purpose = 0;
+        m.deviceId = currentBackupChoice;
+        m.purpose = 0;
         
-            if (stopFlag) {
-                printf("\nServer shutting down, backup thread exiting...\n");
-                break;
-            }
-            if (SendMessageTo(backupRequest, m)) {
-                printf("\nRequest sent...\n");
-            }
-            else {
-                printf("\nFailed to send.");
-                continue;
-            }
-           
+        if (stopFlag) {
+            printf("\nServer shutting down, backup thread exiting...\n");
+            break;
+        }
+        if (SendMessageTo(backupRequest, m)) {
+            printf("\nRequest sent...\n");
+        }
+        else {
+            printf("\nFailed to send.");
+            continue;
+        }
+
+        
         
         printf("\n\t\t\tReceiving and printing backup for ID %d...",m.deviceId);
         makeSocketNonBlocking(backupRequest);
@@ -329,59 +366,54 @@ DWORD WINAPI getMessagesThread(LPVOID lpParam) {
 
 
 
-
-
-
-
 void InputCommands() {
-    char ch;
+    std::string input;
     while (true) {
-
-        ch = std::getchar();
         const char* commandMenu = "\n\t\t\t\t(1) <-- Backup\n\t\t\t\t(2) <-- Print more info\n\t\t\t\t(3) <-- Print queue [Temporary/Backup]\n\t\t\t\t(4) <-- Exit\n";
         printfP(commandMenu, nullptr, totalMessages.load(), totalBackup.load());
-        // std::cin >> ch;
 
-        if (ch == '4')
-        {
+        std::cout << "\nChoose: ";
+
+        std::getline(std::cin, input);
+
+        if (input == "4") {
             printf("\n\n\t\t\t\tExiting\n");
             break;
         }
-        else if (ch == '1') {
-
+        else if (input == "1") {
             const char* cop = "\n\t\t\t\t(1) <-- Backup for process 1\n\t\t\t\t(2) <-- Backup for process 2\n\t\t\t\t(3) <-- Backup for process 3\n";
             printfP(cop, nullptr, totalMessages.load(), totalBackup.load());
-            std::cin >> currentBackupChoice;
+            
+            std::getline(std::cin, input);
+
+            if (input == "1") currentBackupChoice = 1;
+            else if (input == "2") currentBackupChoice = 2;
+            else if (input == "3") currentBackupChoice = 3;
+            else {
+                printf("\n\t\t\tInvalid backup choice!\n");
+                continue;
+            }
+
             backup = true;
             backupCondition.notify_one();
-
         }
-
-        else if (ch == '2')
-        {
-            if (info == true) {
-                printf("\n\t\t\t\t--------------------------\n\t\t\t\tMore feedback turned OFF\n\t\t\t\t--------------------------\n");
-                info = false;
-            }
-            else {
-
-                info = true;
+        else if (input == "2") {
+            info = !info;
+            if (info) {
                 printf("\n\t\t\t\t--------------------------\n\t\t\t\tMore feedback turned ON\n\t\t\t\t--------------------------\n");
             }
-
+            else {
+                printf("\n\t\t\t\t--------------------------\n\t\t\t\tMore feedback turned OFF\n\t\t\t\t--------------------------\n");
+            }
         }
-        else if(ch=='3'){
-           // printer(messageQueues, queueMtxs);
-              //printQueueSelection(messageQueues, queueMtxs, messageQueuesBackup, queueMtxsBackup, ch);
-          
+        else if (input == "3") {
+            printQueueSelection(messageQueues, queueMtxs, messageQueuesBackup, queueMtxsBackup, '\0');
         }
         else {
-
+            printf("\n\t\t\tInvalid choice!\n");
             continue;
         }
-    
     }
-
 }
 
 
@@ -391,7 +423,6 @@ void InputCommands() {
 
 DWORD WINAPI acceptorThread(LPVOID lpParam) {
     Params pars = *(Params*)lpParam;
-   // SOCKET serverSocket = *(SOCKET*)lpParam;
     makeSocketNonBlocking(pars.serverSocket);
     
     while (!stopFlag) {
@@ -402,7 +433,6 @@ DWORD WINAPI acceptorThread(LPVOID lpParam) {
         {
             if (pars.id == 1) {
                 std::cout << "\nClient connected!" << std::endl;
-                //printSockaddr(clientAddr);
                 {
                     std::unique_lock<std::mutex> lock(socketMutex);
                     enqueue_request(&socketQueue, clientSocket);
@@ -414,7 +444,6 @@ DWORD WINAPI acceptorThread(LPVOID lpParam) {
                     std::cout << "\nProcess for backup connected" << std::endl;
                     std::unique_lock<std::mutex> lock(backupCMutex);
                     enqueue_request(&backupConnections, clientSocket);
-                   // backupConditionClient.notify_one();
                 }
             }
 
@@ -428,9 +457,15 @@ DWORD WINAPI acceptorThread(LPVOID lpParam) {
                 }
                 else {
                     // Fatal error: Break the loop
-                    closesocket(clientSocket);
-                    printf("\n\nError: %d. Shutting down...\n", errCode);
-                    break;
+                    //closesocket(clientSocket);
+                    //printf("\n\nError: %d. Shutting down...\n", errCode);
+                    //break;
+                    //continue;
+                    if (clientSocket != INVALID_SOCKET)
+                        closesocket(clientSocket);
+                    printf("\n\n[acceptor] Error on accept(): %d\n", errCode);
+                    // NE gasi serverSocket, NE izlazi iz thread-a, SAMO nastavi dalje!
+                    continue;
                 }
 
 
@@ -447,6 +482,7 @@ DWORD WINAPI acceptorThread(LPVOID lpParam) {
 
 
 int starting() {
+    
     init_map(&messageQueues);
     init_map(&messageQueuesBackup);
 
@@ -455,6 +491,7 @@ int starting() {
     
     init_req_queue(&socketQueue, 16);
     init_req_queue(&backupConnections, 16);
+
     SOCKET serverSocket = INVALID_SOCKET;
     SOCKET backupListener = INVALID_SOCKET;
     InitializeWindowsSockets();
@@ -476,6 +513,7 @@ int starting() {
     HANDLE acceptorBackup = CreateThread(nullptr, 0, acceptorThread,&p2, 0, nullptr);
     HANDLE backupHandler = CreateThread(nullptr, 0, handleBackupToClient, nullptr, 0, nullptr);
     HANDLE createThread = CreateThread(nullptr, 0, getMessagesThread, nullptr, 0, nullptr);
+    HANDLE queueDeliveryThread = CreateThread(nullptr, 0, QueueDeliveryThread, nullptr, 0, nullptr);
 
     for (int i = 0; i < THREAD_POOL_SIZE; i++) {
         thread_pool[i] = CreateThread(nullptr, 0, handleProcesses, &messageQueues, 0, nullptr);
@@ -491,64 +529,60 @@ int starting() {
     }
     dataCondition.notify_all();
     backupCondition.notify_all();
+    backupConditionClient.notify_all();
 
     // Wait for threads to exit
     WaitForSingleObject(createThread, INFINITE);
     WaitForMultipleObjects(THREAD_POOL_SIZE, thread_pool, TRUE, INFINITE);
     WaitForSingleObject(acceptor, INFINITE);
+    WaitForSingleObject(acceptorBackup, INFINITE);
+    WaitForSingleObject(backupHandler, INFINITE);
+    WaitForSingleObject(queueDeliveryThread, INFINITE);
+    
+
+    CloseHandle(acceptor);
+    CloseHandle(createThread);
+    CloseHandle(queueDeliveryThread);
+    CloseHandle(acceptorBackup);
+    CloseHandle(backupHandler);
+
     printf("\n\t\t\t\tClean up.............\n");     // Cleanup
     Sleep(200);
     for (int i = 0; i < THREAD_POOL_SIZE; i++) {
         CloseHandle(thread_pool[i]);
     }
     
-    //
-    free_map(&messageQueues);
-    /*
-    for (auto i :messageQueues) {
-       // print_queue(&(i.second));
-        printf("\n\tFreeing what is left in temporary queue %d\n",i.first);
-        {
-            std::unique_lock<std::mutex> lock(queueMtxs[i.first]);
-            if (!is_queue_empty(&(i.second))) {
-                    free_queue(&(i.second));
-            }
-        }
-    }
-    */
+    
     free_map(&messageQueuesBackup);
-    /*
-    for (auto i : messageQueuesBackup) {
-        // print_queue(&(i.second));
-        printf("\n\tFreeing what is left in backup queue %d\n", i.first);
-        {
-            std::unique_lock<std::mutex> lock(queueMtxsBackup[i.first]);
-            if (!is_queue_empty(&(i.second))) {
-                free_queue(&(i.second));
-            }
-        }
-    }
-    */
+    free_map(&messageQueues);
     free_mtx_map(&queueMtxs);
     free_mtx_map(&queueMtxsBackup);
     
     
 
     while (!is_req_queue_empty(&socketQueue)) {
-        if (dequeue_request(&socketQueue) != INVALID_SOCKET) {
-            closesocket(dequeue_request(&socketQueue));
+        SOCKET sock = dequeue_request(&socketQueue);
+        if (sock != INVALID_SOCKET) {
+            closesocket(sock);
+        }
+    }
+
+    while (!is_req_queue_empty(&backupConnections)) {
+        SOCKET sock = dequeue_request(&backupConnections);
+        if (sock != INVALID_SOCKET) {
+            closesocket(sock);
         }
     }
 
     free_req_queue(&socketQueue);
     free_req_queue(&backupConnections);
-
-   if(acceptor!=INVALID_HANDLE_VALUE)
-    CloseHandle(acceptor);
-   if(createThread!=INVALID_HANDLE_VALUE)
-    CloseHandle(createThread);
+       
+   
    if (serverSocket != INVALID_SOCKET)
     closesocket(serverSocket);
+
+   if (backupListener != INVALID_SOCKET)
+       closesocket(backupListener);
 
     WSACleanup();
     std::cout << "\n\n\n\t\t\t\t\tDone. Server shut down." << std::endl;

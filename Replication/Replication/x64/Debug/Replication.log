@@ -1,1 +1,15 @@
-﻿  Replication.vcxproj -> C:\Users\draga\Downloads\Replication (1)\Replication\x64\Debug\Replication.exe
+﻿  Helper.cpp
+  Replication.cpp
+C:\Users\draga\Documents\IKP\ReplicationService\Replication\Common\unordered_mtx_map.h(8,9): warning C4005: 'INITIAL_CAPACITY': macro redefinition
+  (compiling source file 'Helper.cpp')
+      C:\Users\draga\Documents\IKP\ReplicationService\Replication\Common\unordered_map.h(8,9):
+      see previous definition of 'INITIAL_CAPACITY'
+  
+C:\Users\draga\Documents\IKP\ReplicationService\Replication\Common\unordered_mtx_map.h(8,9): warning C4005: 'INITIAL_CAPACITY': macro redefinition
+  (compiling source file 'Replication.cpp')
+      C:\Users\draga\Documents\IKP\ReplicationService\Replication\Common\unordered_map.h(8,9):
+      see previous definition of 'INITIAL_CAPACITY'
+  
+C:\Users\draga\Documents\IKP\ReplicationService\Replication\Replication\Replication.cpp(292,9): warning C4101: 'iResult': unreferenced local variable
+  Generating Code...
+  Replication.vcxproj -> C:\Users\draga\Documents\IKP\ReplicationService\Replication\x64\Debug\Replication.exe

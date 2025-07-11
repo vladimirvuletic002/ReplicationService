@@ -7,7 +7,8 @@
 
 
 #include <mutex>
-#include <unordered_map>
+#include <condition_variable>
+#include <string>
 #include <windows.h>
 #include <winsock2.h>
 #include <ws2tcpip.h>
@@ -41,8 +42,8 @@ typedef struct Measurement {
     quantity type;      // Velicina koje se meri(struja,napon,snaga)
     float value;        // Vrednost merenja([A], [V], [kW])
     int purpose = 0;
-    struct tm timeStamp;
-
+    //struct tm timeStamp;
+    int64_t epochTime;
 } Measurement;
 
 typedef struct node {
@@ -81,12 +82,24 @@ typedef struct {
     size_t size;            // Trenutni broj elemenata
 } unordered_mtx_map;
 
+typedef struct KeyValuePairCondVar {
+	int key;
+	std::condition_variable value;
+	struct KeyValuePairCondVar* next;
+} KeyValuePairCondVar;
+
+typedef struct {
+	KeyValuePairCondVar** buckets; // Niz pokazivaca na ulancane liste
+	size_t capacity;        // Kapacitet tabele
+	size_t size;            // Trenutni broj elemenata
+} unordered_condVar_map;
+
 
 SOCKET Connector(const char* SERVICE_IP_ADDRESS, u_short port);
 SOCKET initializeListener(const char* ip_address, const char* port);
 SOCKET InitializeAcceptor(std::atomic<bool>& stopFlag, SOCKET serverSocket);
 bool InitializeWindowsSockets();
-bool SendMessageQ(SOCKET copyServiceSocket, Measurement data, queue *messageQueue, std::mutex &queueMtx);
+void makeSocketNonBlocking(SOCKET socket);
 bool SendMessageTo(SOCKET socket, Measurement data);
 bool EnqueueToMap(std::mutex& queueMtx, unordered_map &messageQueues, Measurement data);
 int ReceiveWithNonBlockingSocket(std::atomic<bool>& stopFlag, SOCKET& socket, Measurement& m);
@@ -95,7 +108,7 @@ bool SafeEnqueue(queue *queue, std::mutex& qMtx, Measurement m);
 bool SafeDequeue(queue *queue, std::mutex& qMtx, Measurement* m);
 void printQueue(queue& q, std::mutex& mtx);
 void printQueueSelection(unordered_map& messageQueues, unordered_mtx_map &queueMtxs, unordered_map& messageQueuesBackup, unordered_mtx_map queueMtxsBackup, char c);
-void printer(unordered_map& messageQueues, unordered_mtx_map &queueMtxs);
+bool printer(unordered_map& messageQueues, unordered_mtx_map &queueMtxs);
 void printMeasurement(Measurement* m);
 
 #endif

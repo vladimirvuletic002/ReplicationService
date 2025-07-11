@@ -1,1 +1,3 @@
-﻿  Process.vcxproj -> C:\Users\draga\Downloads\Replication (1)\Replication\x64\Debug\Process.exe
+﻿  Process.cpp
+C:\Users\draga\Documents\IKP\ReplicationService\Replication\Process\Process.cpp(374,9): warning C4101: 'iResult': unreferenced local variable
+  Process.vcxproj -> C:\Users\draga\Documents\IKP\ReplicationService\Replication\x64\Debug\Process.exe

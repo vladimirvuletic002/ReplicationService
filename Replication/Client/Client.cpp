@@ -135,16 +135,16 @@ int main() {
 
 
 void print_menu() {
-    printf("\n---------UI za izbor opcije---------\n");
-    printf("1 - Unos novog merenja\n");
-    printf("2 - Posalji 5.000 nasumicnih merenja\n");
-    printf("3 - Posalji 10.000 nasumicnih merenja\n");
-    printf("4 - Posalji 100.000 nasumicnih merenja\n");
-    printf("5 - Posalji 1.000.000 nasumicnih merenja\n");
-    printf("6 - Zatrazi backup\n");
-    printf("7 - Prikazi vise informacija\n");
-    printf("8 - Napusti Aplikaciju\n");
-    printf("Izaberi opciju: ");
+    printf("\n---------UI menu---------\n");
+    printf("1 - Enter a measurement\n");
+    printf("2 - Send 5.000 random messages\n");
+    printf("3 - Send 10.000 random messages\n");
+    printf("4 - Send 100.000 random messages\n");
+    printf("5 - Send 1.000.000 random messages\n");
+    printf("6 - Request Backup\n");
+    printf("7 - Print more information\n");
+    printf("8 - Exit\n");
+    printf("Choose an option: ");
 }
 
 
@@ -153,11 +153,11 @@ int choose_device(Measurement* m) {
     int choice = -1;
     int selected;
     do {
-        printf("---------Izbor Uredjaja---------\n");
-        printf("1 - Ampermetar [A]\n");
-        printf("2 - Voltmetar [V]\n");
-        printf("3 - Vatmetar [kW]\n");
-        printf("Izaberi tip merenja: ");
+        printf("---------Devices---------\n");
+        printf("1 - Ampermeter [A]\n");
+        printf("2 - Voltmeter [V]\n");
+        printf("3 - Wattmeter [kW]\n");
+        printf("Choose>>  ");
         if (scanf_s("%d", &choice) != 1) {  // Check if input is not valid
             printf("Invalid input. Please enter a valid number.\n");
             while (getchar() != '\n');  // Discard characters until a newline is found
@@ -181,7 +181,7 @@ int choose_device(Measurement* m) {
         m->deviceId = 3;
         break;
     default:
-        printf("Nevazeci izbor. Zatvaranje aplikacije.\n");
+        printf("Invalid input. Closing the application.\n");
         WSACleanup();
         return 0;
     }
@@ -195,13 +195,13 @@ void inputMeasurement(Measurement* m, int selectedPort) {
 
     do {
 
-        printf("\n----------Unesi novo merenje----------\n");
+        printf("\n----------Enter new measurement----------\n");
 
         switch (selectedPort) {
         case CURRENT_PORT:
-            printf("Jacina struje [A]: ");
+            printf("Electric current [A]: ");
             if (scanf_s("%f", &val) != 1) {
-                printf("Unos nije validan. Pokusajte ponovo.\n");
+                printf("Invalid input. Try Again.\n");
                 while (getchar() != '\n');
                 val = -1;
                 continue;
@@ -210,9 +210,9 @@ void inputMeasurement(Measurement* m, int selectedPort) {
             m->type = CURRENT;
             break;
         case VOLTAGE_PORT:
-            printf("Napon [V]: ");
+            printf("Voltage [V]: ");
             if (scanf_s("%f", &val) != 1) {
-                printf("Unos nije validan. Pokusajte ponovo.\n");
+                printf("Invalid input. Try Again.\n");
                 while (getchar() != '\n');
                 val = -1;
                 continue;
@@ -221,9 +221,9 @@ void inputMeasurement(Measurement* m, int selectedPort) {
             m->type = VOLTAGE;
             break;
         case POWER_PORT:
-            printf("Snaga [kW]: ");
+            printf("Power [kW]: ");
             if (scanf_s("%f", &val) != 1) {
-                printf("Unos nije validan. Pokusajte ponovo.\n");
+                printf("Invalid input. Try Again.\n");
                 while (getchar() != '\n');
                 val = -1;
                 continue;
@@ -243,17 +243,15 @@ void inputMeasurement(Measurement* m, int selectedPort) {
 
     
 
-    time_t current_time = time(NULL);
-    m->timeStamp = *localtime(&current_time);
+    //time_t current_time = time(NULL);
+    //m->timeStamp = *localtime(&current_time);
+    time_t now = time(NULL);
+    m->epochTime = now;
 
     printf("--------------------------------------\n");
 }
 
 
-void makeSocketNonBlocking(SOCKET socket) {
-    u_long mode = 1; // 1 to enable non-blocking mode
-    ioctlsocket(socket, FIONBIO, &mode);
-}
 
 void getBackup(SOCKET connectSocket, Measurement& m) {
     m.purpose = 99;
@@ -273,8 +271,11 @@ void getBackup(SOCKET connectSocket, Measurement& m) {
         makeSocketNonBlocking(connectSocket);
         while (!stop) {
           
-            if (m.purpose == END_OF_QUEUE) { break; }
+            
            int f= nonBlockingReceive(stopFlag, connectSocket, m, stop, print);
+           
+           if (m.purpose == END_OF_QUEUE) { break; }
+           
            if (f != 2) {
                i++;
                if (i < 100) {
@@ -322,7 +323,8 @@ void massSend(SOCKET connectSocket, Measurement* m, int messNum) {
         m->value = randomFloat;
         //m->type = CURRENT;
         time_t current_time = time(NULL);
-        m->timeStamp = *localtime(&current_time);
+        //m->timeStamp = *localtime(&current_time);
+        m->epochTime = current_time;
 
         iResult = send(connectSocket, (const char*)m, sizeof(Measurement), 0);
 

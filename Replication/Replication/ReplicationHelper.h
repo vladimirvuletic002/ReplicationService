@@ -2,9 +2,11 @@
 #include "../Common/unordered_map.h"
 #include "../Common/req_queue.h"
 #include "../Common/unordered_mtx_map.h"
+#include <conio.h>
 #define SERVER_IP_ADDRESS "127.0.0.2"
 #define COPY_SERVER_IP_ADDRESS "127.0.0.3"
 #define NUMBER_OF_POSSIBLE_IDS 3
+#define NUM_DEVICES 3
 
 typedef struct Params {
 

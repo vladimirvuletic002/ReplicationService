@@ -90,17 +90,20 @@ bool free_deq(queue* q) {
 
 void print_queue(queue* q) {
 	if (is_queue_empty(q)) {
-		printf("Red poruka je prazan!\n");
+		printf("Queue is empty!\n");
 		return;
 	}
 
 	node* curr = q->head;
-	printf("Merenja: \n");
+	printf("\n-----------------------\n");
+	printf("Measurements: \n");
 	while (curr) {
 		Measurement m = curr->data;
 		printMeasurement(&m);
 		curr = curr->next;
 	}
+	printf("-----------------------\n");
+
 }
 
 void free_queue(queue* q) {
@@ -115,8 +118,3 @@ void free_queue(queue* q) {
 	q->tail = NULL;
 	q->size = 0;
 }
-
-
-
-
-

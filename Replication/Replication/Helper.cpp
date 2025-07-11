@@ -58,10 +58,11 @@ void ReceiveAndFilterMessages(std::atomic<bool>& stopFlag, Measurement& m, SOCKE
             stop = true;
             m.purpose = 0;
             break;
-        }//if (m.purpose == 55) {
+        }
         
      
         if (EnqueueToMap(mtx, messageQueue, m)) {
+            queue* found = get_queue_for_key(&messageQueue, m.deviceId);
             localCounter++;
             totalBackup++;
         }

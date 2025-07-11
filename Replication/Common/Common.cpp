@@ -128,7 +128,7 @@ SOCKET Connector(const char* SERVICE_IP_ADDRESS, u_short port) {
     if (connectSocket == INVALID_SOCKET)
     {
         printf("socket failed with error: %ld\n", WSAGetLastError());
-        WSACleanup();
+        //WSACleanup();
         return INVALID_SOCKET;
     }
 
@@ -145,7 +145,7 @@ SOCKET Connector(const char* SERVICE_IP_ADDRESS, u_short port) {
     {
         printf("Unable to connect to server.\n");
         closesocket(connectSocket);
-        WSACleanup();
+        //WSACleanup();
         return INVALID_SOCKET;
     }
 
@@ -176,8 +176,8 @@ SOCKET InitializeAcceptor(std::atomic<bool> &stopFlag,SOCKET serverSocket) {
             else {
                 std::cerr << "accept failed shutting down: " << WSAGetLastError() << '\n';
                Sleep(10000);
-               stopFlag = true;
-               break;
+               //stopFlag = true;
+               continue;
             }
         }
         std::cout << "Client connected!" << std::endl;
@@ -187,22 +187,51 @@ SOCKET InitializeAcceptor(std::atomic<bool> &stopFlag,SOCKET serverSocket) {
         // }
         return clientSocket;
     }
+    return INVALID_SOCKET;
 }
 
 
-
-
+void makeSocketNonBlocking(SOCKET socket) {
+	u_long mode = 1; // 1 to enable non-blocking mode
+	ioctlsocket(socket, FIONBIO, &mode);
+	 
+}
 
 
 bool SendMessageTo(SOCKET socket, Measurement data) {
-
     int iResult = send(socket, (const char*)&data, sizeof(Measurement), 0);
+    if (iResult != sizeof(Measurement)) {
+        // Nije poslato sve, ili greska
+        return false;
+    }
 
-    if (iResult > 0) {
-        return true;
+    // cekaj potvrdu, ali najvise 1 sekundu
+    fd_set readfds;
+    FD_ZERO(&readfds);
+    FD_SET(socket, &readfds);
+
+    timeval timeout;
+    timeout.tv_sec = 1;
+    timeout.tv_usec = 0;
+
+    int sel = select(0, &readfds, nullptr, nullptr, &timeout);
+    if (sel > 0 && FD_ISSET(socket, &readfds)) {
+
+        
+        char ack;
+        int ackResult = recv(socket, &ack, 1, 0);
+        if (ackResult == 1 && ack == 'A') {
+            //printf("\nACK RECEIVED\n");
+            return true;
+        }
+        else {
+            printf("\nNo ACK from CopyService, connection lost?\n");
+            return false;
+        }
     }
     else {
-        return true;
+        printf("\nNo ACK received (timeout), connection lost?\n");
+        return false;
     }
 }
 
@@ -211,27 +240,8 @@ bool isQueueInitialized(const queue& q) {
     return (q.head == nullptr && q.tail == nullptr && q.size == 0);
 }
 
-bool SendMessageQ(SOCKET copyServiceSocket, Measurement data, queue *messageQueue, std::mutex& queueMtx) {
-    {
-        std::unique_lock<std::mutex> lock(queueMtx);
-        if (enqueue(messageQueue, data)) {// Dodaj poruku u red za prosleđivanje kopiji
-          
-          //  printf("\nTemporary saving message for device ID: %d", data.deviceId);
-        }
-        else {
-            printf("\nFAILED TO ENQUEUE");
-        }
-        if (SendMessageTo(copyServiceSocket, data)) {
-            //printf("\nSuccess sending mess\n");
-                // Needs to dequeue from tail???
-                return true;
-            }
-       
-        
 
-    }
-    return false;
-}
+
 
 bool EnqueueToMap(std::mutex &queueMtx, unordered_map &messageQueues, Measurement data) {
 
@@ -241,22 +251,18 @@ bool EnqueueToMap(std::mutex &queueMtx, unordered_map &messageQueues, Measuremen
             queue* found = NULL;
             found = get_queue_for_key(&messageQueues, data.deviceId);
 
-            if (enqueue(found, data)) {// Dodaj poruku u red za prosleđivanje kopiji
-                
-
-                // printf("\nMessage enqueued, notifying...");
+            if (enqueue(found, data)) {// Dodaj poruku u red za prosledjivanje kopiji
                 return true;
-                //dataCondition[data.deviceId].notify_all();
             }
         }
         else {
+            bool isEnq = false;
             queue* newQ = (queue*)malloc(sizeof(queue));
             init_queue(newQ);
+            isEnq = enqueue(newQ, data);
             insert_queue_to_map(&messageQueues, data.deviceId, newQ);
-            if (enqueue(newQ, data)) {
-             //printf("\nMessage enqueued, notifying id %d...", data.deviceId);
+            if (isEnq == true) {
                 return true;
-               // dataCondition[data.deviceId].notify_all();
             }
         }
         return false;
@@ -336,9 +342,14 @@ int ReceiveWithNonBlockingSocket(std::atomic<bool>& stopFlag, SOCKET& socket, Me
              }
             
          }
-         {
-             std::unique_lock<std::mutex> lock(mtx);
+
+         // Pokušaj da zaključaš mutex, ali ne čekaj beskonačno
+         if (mtx.try_lock()) {
              print_queue(&q);
+             mtx.unlock();
+         }
+         else {
+             printf("\n\t\t\t\tQueue is currently busy, try again later!\n");
          }
      }
      else {
@@ -346,28 +357,33 @@ int ReceiveWithNonBlockingSocket(std::atomic<bool>& stopFlag, SOCKET& socket, Me
      }
 }
 
- void printer(unordered_map& messageQueues, unordered_mtx_map& queueMtxs) {
+ bool printer(unordered_map& messageQueues, unordered_mtx_map& queueMtxs) {
      printf("\n\t\t\t\t(1) Queue ID1");
      printf("\n\t\t\t\t(2) Queue ID2");
      printf("\n\t\t\t\t(3) Queue ID3\n");
-     char c;
-    
-     std::cin >> c;
-     if (c == '1') {
-        
-         printQueue(*get_queue_for_key(&messageQueues, 1), *get_mtx_for_key(&queueMtxs, 1));
-     }
-     else if (c == '2') {
-         printQueue(*get_queue_for_key(&messageQueues, 2),*get_mtx_for_key(&queueMtxs, 2));
+     
+     std::string input;
 
-     }
-     else if (c == '3') {
-         printQueue(*get_queue_for_key(&messageQueues, 3), *get_mtx_for_key(&queueMtxs, 3));
+     std::getline(std::cin, input);
 
+     int key = -1;
+     if (input == "1") key = 1;
+     else if (input == "2") key = 2;
+     else if (input == "3") key = 3;
+     else return false;
+
+     insert_mtx_to_map(&queueMtxs, key);
+
+     queue* q = get_queue_for_key(&messageQueues, key);
+     std::mutex* mtx = get_mtx_for_key(&queueMtxs, key);
+
+     if (!q || !mtx) {
+         printf("\n\t\t\tQueue or mutex for ID %d not found.", key);
+         return false;
      }
-     else {
-         printf("\n\t\t\tInvalid choice!");
-     }
+
+     printQueue(*q, *mtx);
+     return true;
  }
 
 
@@ -375,19 +391,21 @@ int ReceiveWithNonBlockingSocket(std::atomic<bool>& stopFlag, SOCKET& socket, Me
    
      printf("\n\n\t\t\t\t(1) <-- Temporary Queues");
      printf("\n\t\t\t\t(2) <-- Backup Queues\n");
-     std::cin >> c;
+     std::string input;
+     
+     std::getline(std::cin, input);
 
-     if(c=='1'){
-         
-      //  printer(messageQueues,queueMtxs);
+     bool success = false;
+     if (input == "1") {
+         success = printer(messageQueues, queueMtxs);
      }
-    
-    if (c == '2') {
-       printer(messageQueuesBackup, queueMtxsBackup);
-    }
-    else {
-        printf("\nInvalid choice!");
-    }
+     else if (input == "2") {
+         success = printer(messageQueuesBackup, queueMtxsBackup);
+     }
+
+     if (!success) {
+         printf("\n\t\t\tInvalid choice!\n");
+     }
  }
 
 bool SafeDequeue(queue *queue, std::mutex& qMtx, Measurement* m) {
@@ -419,22 +437,31 @@ bool SafeEnqueue(queue *queue, std::mutex& qMtx, Measurement m) {
 }
 
 void printMeasurement(Measurement* m) {
+    time_t t = m->epochTime;
+    struct tm* tm_info = localtime(&t);
     char time_string[50];
-    strftime(time_string, sizeof(time_string), "%Y-%m-%d %H:%M:%S", &m->timeStamp);
-    printf("ID uredjaja: %d\n", m->deviceId);
+    //strftime(time_string, sizeof(time_string), "%Y-%m-%d %H:%M:%S", &m->timeStamp);
+    //strftime(time_string, sizeof(time_string), "%Y-%m-%d %H:%M:%S", tm_info);
+    if (tm_info != nullptr) {
+        strftime(time_string, sizeof(time_string), "%Y-%m-%d %H:%M:%S", tm_info);
+    }
+    else {
+        strcpy(time_string, "[invalid time]");
+    }
+    printf("Device ID: %d\n", m->deviceId);
     if (m->type == CURRENT) {
-        printf("Jacina struje: %.2f [A]\n", m->value);
+        printf("Electric Current: %.2f [A]\n", m->value);
     }
 
     else if (m->type == VOLTAGE) {
-        printf("Napon: %.2f [V]\n", m->value);
+        printf("Voltage: %.2f [V]\n", m->value);
     }
 
     else {
-        printf("Snaga: %.2f [kW]\n", m->value);
+        printf("Power: %.2f [kW]\n", m->value);
     }
 
-    printf("Vreme: %s\n", time_string);
+    printf("Time: %s\n\n", time_string);
 }
 
 

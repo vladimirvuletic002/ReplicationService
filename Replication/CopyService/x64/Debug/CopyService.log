@@ -1,1 +1,11 @@
-﻿  CopyService.vcxproj -> C:\Users\draga\Downloads\Replication (1)\Replication\x64\Debug\CopyService.exe
+﻿  CopyService.cpp
+C:\Users\draga\Documents\IKP\ReplicationService\Replication\Common\unordered_mtx_map.h(8,9): warning C4005: 'INITIAL_CAPACITY': macro redefinition
+  (compiling source file 'CopyService.cpp')
+      C:\Users\draga\Documents\IKP\ReplicationService\Replication\Common\unordered_map.h(8,9):
+      see previous definition of 'INITIAL_CAPACITY'
+  
+C:\Users\draga\Documents\IKP\ReplicationService\Replication\CopyService\CopyService.cpp(257,13): warning C4101: 'iResult': unreferenced local variable
+  ServiceHelper.cpp
+  Generating Code...
+C:\Users\draga\Documents\IKP\ReplicationService\Replication\CopyService\CopyService.cpp(133,1): warning C4715: 'EnqueueAndNotifyThread': not all control paths return a value
+  CopyService.vcxproj -> C:\Users\draga\Documents\IKP\ReplicationService\Replication\x64\Debug\CopyService.exe

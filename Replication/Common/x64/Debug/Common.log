@@ -1,8 +1,15 @@
 ﻿  Common.cpp
-C:\Users\draga\Downloads\Replication (1)\Replication\Common\Common.cpp(29,10): warning C4101: 'recvbuf': unreferenced local variable
-C:\Users\draga\Downloads\Replication (1)\Replication\Common\Common.cpp(122,9): warning C4101: 'choice': unreferenced local variable
-C:\Users\draga\Downloads\Replication (1)\Replication\Common\Common.cpp(121,9): warning C4101: 'iResult': unreferenced local variable
+  Queue.cpp
+C:\Users\draga\Documents\IKP\ReplicationService\Replication\Common\unordered_mtx_map.h(8,9): warning C4005: 'INITIAL_CAPACITY': macro redefinition
+  (compiling source file 'Common.cpp')
+      C:\Users\draga\Documents\IKP\ReplicationService\Replication\Common\unordered_map.h(8,9):
+      see previous definition of 'INITIAL_CAPACITY'
+  
+C:\Users\draga\Documents\IKP\ReplicationService\Replication\Common\Common.cpp(29,10): warning C4101: 'recvbuf': unreferenced local variable
+C:\Users\draga\Documents\IKP\ReplicationService\Replication\Common\Common.cpp(122,9): warning C4101: 'choice': unreferenced local variable
+C:\Users\draga\Documents\IKP\ReplicationService\Replication\Common\Common.cpp(121,9): warning C4101: 'iResult': unreferenced local variable
+  unordered_condVar_map.cpp
+  unordered_map.cpp
   unordered_mtx_map.cpp
   Generating Code...
-C:\Users\draga\Downloads\Replication (1)\Replication\Common\Common.cpp(190,1): warning C4715: 'InitializeAcceptor': not all control paths return a value
-  Common.vcxproj -> C:\Users\draga\Downloads\Replication (1)\Replication\x64\Debug\Common.lib
+  Common.vcxproj -> C:\Users\draga\Documents\IKP\ReplicationService\Replication\x64\Debug\Common.lib

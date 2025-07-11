@@ -9,6 +9,8 @@ queue messageBackup;
 std::mutex queueMutex;
 int localCount = 0;
 
+void inputCommands();
+
 DWORD WINAPI getMessagesThread(LPVOID lpParam) {
    
     SOCKET getMessages = Connector(PROCESS_SERVER_IP, 9001);
@@ -34,7 +36,6 @@ DWORD WINAPI getMessagesThread(LPVOID lpParam) {
                     int i = 0;
                     while (!is_queue_empty(&messageBackup)) {
                         i++;
-                        //TESTING, this is not suppose to dequeue
                         dequeue(&messageBackup, &m);
                         m.purpose = 505;
                         if (i < 100) {
@@ -47,8 +48,10 @@ DWORD WINAPI getMessagesThread(LPVOID lpParam) {
 
                     }
                     printf("\n\t\t\t\tDone.\tTotal: %d\n\n",i);
-                    m.purpose = END_OF_QUEUE;
-                    send(getMessages, (const char*)&m, sizeof(Measurement), 0);
+                    Measurement endSignal = {};
+                    endSignal.deviceId = m.deviceId;
+                    endSignal.purpose = END_OF_QUEUE;
+                    send(getMessages, (const char*)&endSignal, sizeof(Measurement), 0);
                 }
                 else {
                     m.purpose = EMPTY_QUEUE;
@@ -87,6 +90,7 @@ bool processDataFromCopy(queue &messageBackup, Measurement data, int bytesReceiv
 {   
 
     if (bytesReceived <= 0) {
+        printf("\n\--------NIJE STIGLO ALOOOOOO!!!:---------\n");
         return false;
     }
     else{
@@ -126,13 +130,6 @@ bool processDataFromCopy(queue &messageBackup, Measurement data, int bytesReceiv
 
 
 
-void makeSocketNonBlocking(SOCKET socket) {
-    u_long mode = 1; // 1 to enable non-blocking mode
-    ioctlsocket(socket, FIONBIO, &mode);
-}
-
-
-
 
 int start() {
    
@@ -147,8 +144,9 @@ int start() {
         printf("FAILED");
         return -1;
     }
-    //Connector("127.0.0.4", port, connectSocket);
+
     connectSocket = Connector(PROCESS_SERVER_IP, port);
+
     init_queue(&messageBackup);
     if (connectSocket == INVALID_SOCKET) {
         return -1;
@@ -157,10 +155,10 @@ int start() {
 
     HANDLE backupThread = CreateThread(nullptr, 0, getMessagesThread, &messageBackup, 0, nullptr);
     makeSocketNonBlocking(connectSocket);
-   printf("\nWaiting for measurements...\n");
+    printf("\Waiting for measurements...\n");
+    //inputCommands();
     while (!stopFlag) {
 
-        
         int bytesReceived = recv(connectSocket, (char*)&data, sizeof(Measurement), 0);
         if (bytesReceived < 0) {
             if (stopFlag) {
@@ -181,14 +179,18 @@ int start() {
         else {
          
             if (!processDataFromCopy(messageBackup, data, bytesReceived, messNum)) {
-                printf("\nSUCCESS");
+                printf("\nMessage receive faled!\n");
                 break;
             }
         }
 
     }
+
+
     stopFlag = true;
     Sleep(100);
+
+    
    
     // cleanup
     {
@@ -200,7 +202,7 @@ int start() {
     if (connectSocket!=INVALID_SOCKET) {
         closesocket(connectSocket);
     }
-    if (backupThread != 0) {
+    if (backupThread != NULL && backupThread != INVALID_HANDLE_VALUE) {
         CloseHandle(backupThread);
     }
     WSACleanup();
@@ -208,15 +210,43 @@ int start() {
     return 0;
 }
 
+void inputCommands() {
+    char ch;
+    while (true) {
+        ch = std::getchar();
+        printf("\n\t\t\t\t(1) < --Exit\n\t\t\t\t(2) <-- Print all info\n\t\t\t\t");
 
+        // std::cin >> ch;
+
+        if (ch == '1')
+        {
+            printf("\n\nExiting\n");
+            break;
+
+        }
+        else if (ch == '2')
+        {
+            if (info == true) {
+                printf("\n\n\n\t\t\t\t--------------------------\n\t\t\t\tMore feedback turned OFF\n\t\t\t\t--------------------------\n");
+                info = false;
+            }
+            else {
+
+                info = true;
+                printf("\n\n\n\t\t\t\t--------------------------\n\t\t\t\tMore feedback turned ON\n\t\t\t\t--------------------------\n");
+            }
+
+
+        }
+        else {
+            continue;
+        }
+
+    }
+}
 
 int main() {
     //startProcess(messageBackup, &queueMutex, processID);
     start();
     return 0;// start();
 }
-
-
-
-
-

@@ -9,8 +9,6 @@ typedef struct req_queue {
     int front;            // Pokazivac na prvi el. u redu
     int rear;             // Pokazivac na poslednji el. u redu
     int size;             // Trenutni br elemenata u redu
-    //CRITICAL_SECTION lock; // Kriticna sekcija za sinhronizaciju
-    //CONDITION_VARIABLE notEmpty; // Uslovni signal kada red nije prazan
 } req_queue;
 
 

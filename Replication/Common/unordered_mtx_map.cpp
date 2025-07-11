@@ -104,30 +104,3 @@ std::mutex* get_mtx_for_key(unordered_mtx_map* map, int key) {
     }
     return NULL; // Kljuc nije pronadjen
 }
-
-// Brisanje mutex-a iz mape
-/*
-int erase_mtx(unordered_mtx_map* map, int key) {
-    size_t index = hash(key, map->capacity);
-    KeyValuePairMtx* current = map->buckets[index];
-    KeyValuePairMtx* prev = NULL;
-
-    while (current) {
-        if (current->key == key) {
-            if (prev) {
-                prev->next = current->next;
-            }
-            else {
-                map->buckets[index] = current->next;
-            }
-            delete current;
-            map->size--;
-            return 1; // Uspesno obrisan
-        }
-        prev = current;
-        current = current->next;
-    }
-
-    return 0; // Kljuc nije pronadjen
-}
-*/
